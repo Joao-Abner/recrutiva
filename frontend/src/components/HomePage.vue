@@ -2,7 +2,8 @@
     <div class="homepage">
         <header class="header">
             <img src="@/assets/logo-recrutiva.png" alt="Logo-recrutiva" class="logo" />
-            <img src="@/assets/recrutiva-slogan.png" alt="slogan-recrutiva" class="logo-slogan" />
+            <!-- <img src="@/assets/recrutiva-slogan.png" alt="slogan-recrutiva" class="logo-slogan" /> -->
+            <h1 class="logo-text">RECRUTIVA</h1>
             <button class="login-button">ACESSAR/CADASTRAR</button>
         </header>
 
@@ -32,8 +33,13 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+
 .homepage {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     text-align: center;
     color: #333;
 }
@@ -44,20 +50,32 @@ export default {
     padding: 1.25rem;
 }
 
-.logo-slogan {
-    width: 18.75rem;
+.logo-text {
+    font-family: 'Roboto mono', sans-serif;
+    font-weight: 700;
+    font-size: 3.5rem;
+    text-align: left;
+    color: #f02424;
+    letter-spacing: 0.1em;
+    margin: 0;
+    padding-top: 3%;
 }
 
+/* .logo-slogan {
+    width: 18.75rem;
+} */
+
 .logo {
-    width: 5.875rem;
+    width: 7.875rem;
 }
 
 .login-button {
-    font-size: .875rem;
+    font-size: 1rem;
     color: #333;
     background: none;
     border: none;
     cursor: pointer;
+    padding: 2rem;
 }
 
 .content {
