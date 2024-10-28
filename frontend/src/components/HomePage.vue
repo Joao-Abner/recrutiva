@@ -10,7 +10,7 @@
             <h1 class="title">Crie uma jornada de R&S</h1>
             <h2 class="subtitle">mais moderna e otimizada.</h2>
             <p class="description">
-                Melhore a sua aquisição e qualificação de talentos <br>com o sistema de recrutamento da Nexti.
+                Melhore a sua aquisição e qualificação de talentos <br>com o sistema de recrutamento Recrutiva.
             </p>
             <button class="cta-button">CONHEÇA AGORA!</button>
         </main>
