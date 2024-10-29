@@ -28,7 +28,7 @@
             <p class="description">
                 Melhore a sua aquisição e qualificação de talentos <br>com o sistema de recrutamento Recrutiva.
             </p>
-            <button class="cta-button">CONHEÇA AGORA!</button>
+            <a href="#recrutador" class="cta-button">CONHEÇA AGORA!</a>
         </main>
     </div>
 </template>
@@ -134,18 +134,19 @@ export default {
     color: #666;
     margin-top: .625rem;
     text-align: center;
-    padding: .625rem;
+    padding: 2rem;
 }
 
 .cta-button {
     background-color: #f02424;
     color: white;
     border: none;
-    border-radius: 8px;
-    padding: .9375rem 1.875rem;
+    border-radius: 100px;
+    padding: .9375rem 3.875rem;
     font-size: 1.5rem;
     cursor: pointer;
     margin-top: 1.25rem;
+    text-decoration: none;
 }
 
 .cta-button:hover {
