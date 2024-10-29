@@ -4,7 +4,15 @@
             <img src="@/assets/logo-recrutiva.png" alt="Logo-recrutiva" class="logo" />
             <!-- <img src="@/assets/recrutiva-slogan.png" alt="slogan-recrutiva" class="logo-slogan" /> -->
             <h1 class="logo-text">RECRUTIVA</h1>
-            <button class="login-button">ACESSAR/CADASTRAR</button>
+            <div class="dropdown">
+                <button class="login-button" @click="toggleDropdown">
+                    ACESSAR/CADASTRAR <span class="arrow">▼</span>
+                </button>
+                <div v-if="isDropdownVisible" class="dropdown-menu">
+                    <a href="#candidato" class="dropdown-item">CANDIDATO</a>
+                    <a href="#recrutador" class="dropdown-item">RECRUTADOR</a>
+                </div>
+            </div>
         </header>
 
         <main class="content">
@@ -29,6 +37,29 @@
 <script>
 export default {
     name: "HomePage",
+    data() {
+        return {
+            isDropdownVisible: false,
+        };
+    },
+    methods: {
+        toggleDropdown() {
+            this.isDropdownVisible = !this.isDropdownVisible;
+        },
+        handleOutsideClick(event) {
+            const dropdown = this.$el.querySelector(".dropdown");
+            if (!dropdown.contains(event.target)) {
+                this.isDropdownVisible = false;
+            }
+        },
+    },
+    mounted() {
+        // Fecha o dropdown se o usuário clicar fora dele
+        document.addEventListener("click", this.handleOutsideClick);
+    },
+    beforeDestroy() {
+        document.removeEventListener("click", this.handleOutsideClick);
+    },
 };
 </script>
 
@@ -71,6 +102,8 @@ export default {
 
 .login-button {
     font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
     color: #333;
     background: none;
     border: none;
@@ -125,5 +158,37 @@ export default {
 .icon {
     width: 1.875rem;
     height: 1.875rem;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.arrow {
+    font-size: .825rem;
+}
+
+.dropdown-menu {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    background-color: #f02424;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    min-width: 10rem;
+    z-index: 1;
+    border-radius: 4px;
+}
+
+.dropdown-item {
+    color: #333;
+    padding: .75rem 1rem;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-item:hover {
+    background-color: #f1f1f1;
 }
 </style>
