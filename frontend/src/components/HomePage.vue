@@ -96,7 +96,7 @@ export default {
 }
 
 .login-button {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: bold;
     text-transform: uppercase;
     color: #333;
@@ -104,6 +104,10 @@ export default {
     border: none;
     cursor: pointer;
     padding: 2rem;
+}
+
+.login-button:hover {
+    color: #f02424;
 }
 
 .content {
