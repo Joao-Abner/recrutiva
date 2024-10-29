@@ -14,6 +14,15 @@
             </div>
         </header>
 
+        <!-- Ícones decorativos ao redor -->
+        <div class="icons">
+            <!-- <img src="@/assets/icons/pencil.svg" alt="Pencil Icon" class="icon icon-pencil" /> -->
+            <!-- <img src="@/assets/icons/computer.svg" alt="Computer Icon" class="icon icon-computer" /> -->
+            <img src="@/assets/icons/bubble.svg" alt="Bubble Icon" class="icon icon-bubble" />
+            <img src="@/assets/icons/star.svg" alt="Star Icon" class="icon icon-star" />
+            <img src="@/assets/icons/lightbulb.svg" alt="Lightbulb Icon" class="icon icon-lightbulb" />
+        </div>
+
         <main class="content">
             <h1 class="title">Crie uma jornada de R&S</h1>
             <h2 class="subtitle">mais moderna e otimizada.</h2>
@@ -22,14 +31,6 @@
             </p>
             <button class="cta-button">CONHEÇA AGORA!</button>
         </main>
-
-        <!-- Ícones decorativos ao redor -->
-        <div class="icons">
-            <!-- Pode usar tags de imagem ou ícones SVG -->
-            <span class="icon pencil-icon"></span>
-            <span class="icon web-icon"></span>
-            <span class="icon lightbulb-icon"></span>
-        </div>
     </div>
 </template>
 
@@ -147,6 +148,10 @@ export default {
     margin-top: 1.25rem;
 }
 
+.cta-button:hover {
+    background-color: #333;
+}
+
 .icons {
     display: flex;
     justify-content: center;
@@ -155,8 +160,36 @@ export default {
 }
 
 .icon {
-    width: 1.875rem;
-    height: 1.875rem;
+    width: 4rem;
+    height: 4rem;
+    position: absolute;
+}
+
+.icon-pencil {
+    top: 10%;
+    left: 5%;
+}
+
+.icon-computer {
+    top: 15%;
+    right: 10%;
+}
+
+.icon-bubble {
+    bottom: 20%;
+    left: 10%;
+}
+
+.icon-star {
+    top: 30%;
+    right: 5%;
+}
+
+.icon-lightbulb {
+    width: 5.5rem;
+    height: 5.5rem;
+    bottom: 15%;
+    right: 12%;
 }
 
 .dropdown {
