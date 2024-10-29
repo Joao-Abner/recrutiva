@@ -39,7 +39,7 @@
 
         <div class="form-group">
           <label for="nascimento">CNPJ*</label>
-          <input type="text" name="cnpj" id="cnpj" required>
+          <input type="text" name="cnpj" id="cnpj" placeholder="Digite o CNPJ" required>
         </div>
 
         <div class="form-group">

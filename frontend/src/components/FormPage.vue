@@ -80,19 +80,26 @@
 <script>
 import { RouterLink } from 'vue-router'
 
+
 </script>
 
 <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+
+
 .container {
   max-width: 600px;
   margin: auto;
-  font-family: Arial, sans-serif;
+  font-family: 'poppins', sans-serif;
   color: #333;
 }
 
 .container_top_page {
   text-align: center;
-  background-color: #d81b60;
+  background-color: #f02424;
   padding: 20px;
   color: white;
 }
@@ -101,6 +108,7 @@ import { RouterLink } from 'vue-router'
   display: flex;
   justify-content: center;
   margin: 20px 0;
+  font-family: 'Rovoto mono', sans-serif;
 }
 
 .tab {
@@ -143,7 +151,7 @@ input, select {
 .submit-button {
   width: 100%;
   padding: 15px;
-  background-color: #2c3e50;
+  background-color: #f02424;
   color: white;
   font-size: 16px;
   font-weight: bold;
@@ -153,7 +161,7 @@ input, select {
 }
 
 .submit-button:hover {
-  background-color: #34495e;
+  background-color: #333;
 }
 
 .footer {
@@ -162,7 +170,7 @@ input, select {
 }
 
 .footer a {
-  color: #d81b60;
+  color: #f02424;
   text-decoration: none;
 }
 
