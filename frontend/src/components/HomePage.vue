@@ -2,7 +2,6 @@
     <div class="homepage">
         <header class="header">
             <img src="@/assets/logo-recrutiva.png" alt="Logo-recrutiva" class="logo" />
-            <!-- <img src="@/assets/recrutiva-slogan.png" alt="slogan-recrutiva" class="logo-slogan" /> -->
             <h1 class="logo-text">RECRUTIVA</h1>
             <div class="dropdown">
                 <button class="login-button" @click="toggleDropdown">
@@ -91,10 +90,6 @@ export default {
     margin: 0;
     padding-top: 3%;
 }
-
-/* .logo-slogan {
-    width: 18.75rem;
-} */
 
 .logo {
     width: 7.875rem;
