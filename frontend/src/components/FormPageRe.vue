@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <div class="container_top_page">
-      <h1>Olá, candidato!</h1>
-      <p>Encontre a sua vaga ideal em empresas comprometidas com o seu futuro profissional.</p>
+      <h1>Olá, Recrutador!</h1>
+      <p>Encontre o seu candidato ideal em empresas comprometidas com o seu futuro.</p>
     </div>
 
     <div class="tabs">
@@ -13,28 +13,13 @@
     <div class="box-info">
       <form>
         <div class="form-group">
-          <label for="nome">Nome *</label>
+          <label for="nome">Nome da empresa *</label>
           <input type="text" name="nome" id="nome" placeholder="Nome" required>
-        </div>
-
-        <div class="form-group">
-          <label for="sobrenome">Sobrenome *</label>
-          <input type="text" name="sobrenome" id="sobrenome" placeholder="Sobrenome" required>
         </div>
 
         <div class="form-group">
           <label for="email">Email *</label>
           <input type="email" name="email" id="email" placeholder="Digite seu Email" required>
-        </div>
-
-        <div class="form-group">
-          <label for="sexo">Sexo *</label>
-          <select name="sexo" id="sexo" required>
-            <option value="">Selecione</option>
-            <option value="masculino">Masculino</option>
-            <option value="feminino">Feminino</option>
-            <option value="feminino">Outro</option>
-          </select>
         </div>
 
         <div class="form-group">
@@ -48,18 +33,13 @@
         </div>
 
         <div class="form-group">
-          <label for="email">CPF *</label>
-          <input type="text" name="cpf" id="cpf" placeholder="Digite seu CPF" required>
-        </div>
-
-        <div class="form-group">
           <label for="telefone">Telefone *</label>
           <input type="tel" name="telefone" id="telefone" placeholder="Digite seu telefone" required>
         </div>
 
         <div class="form-group">
-          <label for="nascimento">Data de nascimento *</label>
-          <input type="date" name="nascimento" id="nascimento" required>
+          <label for="nascimento">CNPJ*</label>
+          <input type="text" name="cnpj" id="cnpj" required>
         </div>
 
         <div class="form-group">
@@ -72,7 +52,7 @@
     </div>
 
     <div class="footer">
-      <p>Problemas com seu cadastro? <a href="#">Clique para acessar como recrutador</a></p>
+      <p>Problemas com seu cadastro? <a href="#">Clique para contatar o suporte</a></p>
     </div>
   </div>
 </template>
