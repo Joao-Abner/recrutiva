@@ -16,8 +16,8 @@
 
         <!-- Ícones decorativos ao redor -->
         <div class="icons">
-            <!-- <img src="@/assets/icons/pencil.svg" alt="Pencil Icon" class="icon icon-pencil" /> -->
-            <!-- <img src="@/assets/icons/computer.svg" alt="Computer Icon" class="icon icon-computer" /> -->
+            <img src="@/assets/icons/pencil.png" alt="Pencil Icon" class="icon icon-pencil" />
+            <img src="@/assets/icons/computer.png" alt="Computer Icon" class="icon icon-computer" />
             <img src="@/assets/icons/bubble.svg" alt="Bubble Icon" class="icon icon-bubble" />
             <img src="@/assets/icons/star.svg" alt="Star Icon" class="icon icon-star" />
             <img src="@/assets/icons/lightbulb.svg" alt="Lightbulb Icon" class="icon icon-lightbulb" />
@@ -160,23 +160,27 @@ export default {
 }
 
 .icon {
-    width: 4rem;
-    height: 4rem;
+    width: 4.5rem;
+    height: 4.5rem;
     position: absolute;
 }
 
 .icon-pencil {
-    top: 10%;
+    width: 5.5rem;
+    height: 5.5rem;
+    top: 30%;
     left: 5%;
 }
 
 .icon-computer {
-    top: 15%;
-    right: 10%;
+    width: 5.5rem;
+    height: 5.5rem;
+    top: 52%;
+    left: 14%;
 }
 
 .icon-bubble {
-    bottom: 20%;
+    bottom: 15%;
     left: 10%;
 }
 
