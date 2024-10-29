@@ -13,16 +13,15 @@
                 </div>
             </div>
         </header>
-
         <!-- Ícones decorativos ao redor -->
         <div class="icons">
             <img src="@/assets/icons/pencil.png" alt="Pencil Icon" class="icon icon-pencil" />
             <img src="@/assets/icons/computer.png" alt="Computer Icon" class="icon icon-computer" />
             <img src="@/assets/icons/bubble.svg" alt="Bubble Icon" class="icon icon-bubble" />
+            <img src="@/assets/icons/lightbubble.svg" alt="lightbubble Icon" class="icon icon-lightbubble" />
             <img src="@/assets/icons/star.svg" alt="Star Icon" class="icon icon-star" />
-            <img src="@/assets/icons/lightbulb.svg" alt="Lightbulb Icon" class="icon icon-lightbulb" />
+            <img src="@/assets/icons/bulb.png" alt="Lightbulb Icon" class="icon icon-bulb" />
         </div>
-
         <main class="content">
             <h1 class="title">Crie uma jornada de R&S</h1>
             <h2 class="subtitle">mais moderna e otimizada.</h2>
@@ -160,10 +159,28 @@ export default {
     margin-top: 1.875rem;
 }
 
+@keyframes rotate-icon {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(25deg);
+        /* Gira 25º no sentido horário */
+    }
+
+    100% {
+        transform: rotate(0deg);
+        /* Volta à posição inicial */
+    }
+}
+
 .icon {
     width: 4.5rem;
     height: 4.5rem;
     position: absolute;
+    animation: rotate-icon 10s ease-in-out infinite;
+    /* Animação contínua com um ciclo completo de ida e volta */
 }
 
 .icon-pencil {
@@ -181,8 +198,8 @@ export default {
 }
 
 .icon-bubble {
-    bottom: 15%;
-    left: 10%;
+    bottom: 14%;
+    left: 7%;
 }
 
 .icon-star {
@@ -190,14 +207,21 @@ export default {
     right: 5%;
 }
 
-.icon-lightbulb {
+.icon-bulb {
     width: 5.5rem;
     height: 5.5rem;
-    bottom: 15%;
+    top: 50%;
     right: 12%;
 }
 
-.dropdown {
+.icon-lightbubble {
+    width: 5.5rem;
+    height: 5.5rem;
+    bottom: 12%;
+    right: 8%;
+}
+
+.icon-lightbubble .dropdown {
     position: relative;
     display: inline-block;
 }
