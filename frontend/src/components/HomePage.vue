@@ -131,10 +131,11 @@ export default {
 }
 
 .description {
-    font-size: 2rem;
+    font-size: 1.7rem;
     color: #666;
     margin-top: .625rem;
     text-align: center;
+    padding: .625rem;
 }
 
 .cta-button {
