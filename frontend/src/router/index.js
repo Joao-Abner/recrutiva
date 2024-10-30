@@ -28,6 +28,14 @@ const router = createRouter({
         title: 'FormPageRecrutador'
       }
     },
+    {
+      path: '/loginre',
+      name: 'LoginRe',
+      component: () => import('../views/LoginPage.vue'),
+      meta: {
+        title: 'LoginRecrutador'
+      }
+    },
   ]
 })
 
