@@ -13,13 +13,21 @@ const router = createRouter({
       }
     },
     {
-      path: '/about',
-      name: 'about',
-      component: () => import('../views/AboutView.vue'),
+      path: '/cadastro',
+      name: 'formpage',
+      component: () => import('../components/FormPage.vue'),
       meta: {
-        title: 'About'
+        title: 'FormPage'
       }
-    }
+    },
+    {
+      path: '/cadastrore',
+      name: 'formpagere',
+      component: () => import('../components/FormPageRe.vue'),
+      meta: {
+        title: 'FormPageRecrutador'
+      }
+    },
   ]
 })
 
