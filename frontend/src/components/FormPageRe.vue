@@ -72,7 +72,7 @@ import { RouterLink } from 'vue-router'
 
 .container_top_page {
   text-align: center;
-  background-color: #d81b60;
+  background-color: #f02424;
   padding: 20px;
   color: white;
 }
@@ -93,7 +93,7 @@ import { RouterLink } from 'vue-router'
 }
 
 .tab.active {
-  border-bottom: 2px solid #d81b60;
+  border-bottom: 2px solid #f02424;
 }
 
 .box-info {
@@ -133,7 +133,7 @@ input, select {
 }
 
 .submit-button:hover {
-  background-color: #34495e;
+  background-color: #333;
 }
 
 .footer {
@@ -142,7 +142,7 @@ input, select {
 }
 
 .footer a {
-  color: #d81b60;
+  color: #f02424;
   text-decoration: none;
 }
 
