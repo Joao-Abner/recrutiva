@@ -34,6 +34,7 @@ class UserController extends Controller
             'phone' => $request->phone,
             'birth_date' => $request->birth_date,
             'country' => $request->country,
+            'role' => 'candidate', // Define o papel como candidato
         ]);
 
         return response()->json(['message' => 'Candidate registered successfully!'], 201);
@@ -57,6 +58,7 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
             'phone' => $request->phone,
             'cnpj' => $request->cnpj,
+            'role' => 'recruiter', // Define o papel como recrutador
         ]);
 
         return response()->json(['message' => 'Recruiter registered successfully!'], 201);
