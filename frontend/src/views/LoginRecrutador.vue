@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+    <div class="container">
     <div class="container_top_page">
       
       <RouterLink to="/" class="button_sair">
@@ -12,58 +12,34 @@
       <p>Encontre o seu candidato ideal em empresas comprometidas com o seu futuro.</p>
       </div>
     </div>
-
-    <div class="tabs">
-      <RouterLink to="/loginre" class="tab ">JÁ SOU CADASTRADO</RouterLink>
-      <RouterLink to="/cadastro" class="tab active">QUERO ME CADASTRAR</RouterLink>
+  
+      <div class="tabs">
+        <RouterLink to="/loginre" class="tab ">JÁ SOU CADASTRADO</RouterLink>
+        <RouterLink to="/cadastrore" class="tab active">QUERO ME CADASTRAR</RouterLink>
+      </div>
+  
+      <div class="box-info">
+        <form>
+  
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" name="email" id="email" placeholder="Digite seu Email" required>
+          </div>
+  
+          <div class="form-group">
+            <label for="senha">Senha *</label>
+            <input type="password" name="senha" id="senha" placeholder="Digite sua senha" required>
+          </div>
+  
+          <button type="submit" class="submit-button">EFETUAR LOGIN</button>
+        </form>
+      </div>
+  
+      <div class="footer">
+        <p>Problemas com seu cadastro? <a href="#">Clique para contatar o suporte</a></p>
+      </div>
     </div>
-
-    <div class="box-info">
-      <form>
-        <div class="form-group">
-          <label for="nome">Nome da empresa *</label>
-          <input type="text" name="nome" id="nome" placeholder="Nome" required>
-        </div>
-
-        <div class="form-group">
-          <label for="email">Email *</label>
-          <input type="email" name="email" id="email" placeholder="Digite seu Email" required>
-        </div>
-
-        <div class="form-group">
-          <label for="senha">Senha *</label>
-          <input type="password" name="senha" id="senha" placeholder="Digite sua senha" required>
-        </div>
-
-        <div class="form-group">
-          <label for="repetir_senha">Repetir senha *</label>
-          <input type="password" name="repetir_senha" id="repetir_senha" placeholder="Repita sua senha" required>
-        </div>
-
-        <div class="form-group">
-          <label for="telefone">Telefone *</label>
-          <input type="tel" name="telefone" id="telefone" placeholder="Digite seu telefone" required>
-        </div>
-
-        <div class="form-group">
-          <label for="nascimento">CNPJ*</label>
-          <input type="text" name="cnpj" id="cnpj" placeholder="Digite o CNPJ" required>
-        </div>
-
-        <div class="form-group">
-          <label for="pais">País *</label>
-          <input type="text" name="pais" id="pais" value="Brazil" disabled>
-        </div>
-
-        <button type="submit" class="submit-button">EFETUAR CADASTRO</button>
-      </form>
-    </div>
-
-    <div class="footer">
-      <p>Problemas com seu cadastro? <a href="#">Clique para contatar o suporte</a></p>
-    </div>
-  </div>
-</template>
+  </template>
 
 <script>
 import { RouterLink } from 'vue-router';
