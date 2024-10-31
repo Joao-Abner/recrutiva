@@ -6,7 +6,7 @@
     </div>
 
     <div class="tabs">
-      <RouterLink to="/" class="tab ">JÁ SOU CADASTRADO</RouterLink>
+      <RouterLink to="/loginre" class="tab ">JÁ SOU CADASTRADO</RouterLink>
       <RouterLink to="/cadastro" class="tab active">QUERO ME CADASTRAR</RouterLink>
     </div>
 
@@ -63,6 +63,10 @@ import { RouterLink } from 'vue-router'
 </script>
 
 <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+
+
 .container {
   max-width: 600px;
   margin: auto;
