@@ -18,7 +18,12 @@ class UserController extends Controller
             'email' => 'required|string|email|unique:users',
             'gender' => 'required|in:Male,Female,Other',
             'password' => 'required|string|min:8|confirmed',
-            'phone' => 'nullable|string|unique:users',
+            'phone' => [
+            'nullable',
+            'string',
+            'unique:users',
+            'regex:/^\(\d{2}\) \d{5}-\d{4}$/' // regex para telefone no formato (XX) XXXXX-XXXX
+            ],  
             'birth_date' => 'nullable|date',
             'country' => ['required', Rule::in(array_column(\App\Enums\CountryEnum::cases(), 'value'))],
         ]);
@@ -46,7 +51,12 @@ class UserController extends Controller
             'last_name' => 'required|string|max:255',
             'email' => 'required|string|email|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'phone' => 'nullable|string|unique:users',
+            'phone' => [
+            'nullable',
+            'string',
+            'unique:users',
+            'regex:/^\(\d{2}\) \d{5}-\d{4}$/' // regex para telefone no formato (XX) XXXXX-XXXX
+            ],  
             'cnpj' => 'required|string|unique:users',
             'country' => ['required', Rule::in(array_column(\App\Enums\CountryEnum::cases(), 'value'))], // validação dos paises com base no arquivo CountryEnum
         ]);
