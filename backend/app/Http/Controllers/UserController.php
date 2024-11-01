@@ -67,7 +67,8 @@ class UserController extends Controller
         ]);
 
         User::create([
-            'company_name' => $request->company_name,
+            'first_name' => $request->first_name, // Nome do recrutador
+            'last_name' => $request->last_name, 
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'phone' => $request->phone,
