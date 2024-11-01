@@ -13,12 +13,12 @@ class CreateUsersTable extends Migration
             $table->string('first_name');
             $table->string('last_name'); 
             $table->string('email')->unique();
-            $table->enum('gender', ['Male', 'Female', 'Other']);
+            $table->enum('gender', ['Male', 'Female', 'Other']); // Obrigatório para candidato
             $table->string('password'); 
             $table->string('phone')->nullable(); // Opcional
-            $table->date('birth_date')->nullable(); // Opcional
+            $table->date('birth_date')->nullable(); // Opcional para candidato
             $table->string('country'); 
-            $table->string('cnpj')->unique()->nullable();
+            $table->string('cnpj')->unique(); // Obrigatório para recrutador
             $table->enum('role', ['candidate', 'recruiter'])->default('candidate'); // Obrigatório com valor padrão candidato
             $table->timestamps();
         });
