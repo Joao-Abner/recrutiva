@@ -28,7 +28,7 @@
           <p class="description">
               Melhore a sua aquisição e qualificação de talentos <br>com o sistema de recrutamento Recrutiva.
           </p>
-          <RouterLink to="/cadastrore" class="cta-button">CONHEÇA AGORA!</RouterLink>
+          <RouterLink to="/loginre" class="cta-button">CONHEÇA AGORA!</RouterLink>
       </main>
   </div>
 </template>

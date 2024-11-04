@@ -1,14 +1,23 @@
 <template>
-  <div class="container">
+   <div class="container">
     <div class="container_top_page">
-      <h1>Olá, candidato!</h1>
-      <p>Encontre a sua vaga ideal em empresas comprometidas com o seu futuro profissional.</p>
+      
+      <RouterLink to="/" class="button_sair">
+        <ArrowLeft />
+      </RouterLink> 
+      
+      <div class="texto_header">
+        <h1>Olá, Candidato!</h1>
+      
+      <p>Encontre o sua vaga ideial.</p>
+      </div>
     </div>
 
     <div class="tabs">
-      <RouterLink to="/" class="tab ">JÁ SOU CADASTRADO</RouterLink>
+      <RouterLink to="/loginca" class="tab ">JÁ SOU CADASTRADO</RouterLink>
       <RouterLink to="/cadastro" class="tab active">QUERO ME CADASTRAR</RouterLink>
     </div>
+
 
     <div class="box-info">
       <form>
@@ -27,7 +36,7 @@
           <input type="email" name="email" id="email" placeholder="Digite seu Email" required>
         </div>
 
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label for="sexo">Sexo *</label>
           <select name="sexo" id="sexo" required>
             <option value="">Selecione</option>
@@ -35,7 +44,7 @@
             <option value="feminino">Feminino</option>
             <option value="feminino">Outro</option>
           </select>
-        </div>
+        </div> -->
 
         <div class="form-group">
           <label for="senha">Senha *</label>
@@ -46,27 +55,7 @@
           <label for="repetir_senha">Repetir senha *</label>
           <input type="password" name="repetir_senha" id="repetir_senha" placeholder="Repita sua senha" required>
         </div>
-
-        <div class="form-group">
-          <label for="email">CPF *</label>
-          <input type="text" name="cpf" id="cpf" placeholder="Digite seu CPF" required>
-        </div>
-
-        <div class="form-group">
-          <label for="telefone">Telefone *</label>
-          <input type="tel" name="telefone" id="telefone" placeholder="Digite seu telefone" required>
-        </div>
-
-        <div class="form-group">
-          <label for="nascimento">Data de nascimento *</label>
-          <input type="date" name="nascimento" id="nascimento" required>
-        </div>
-
-        <div class="form-group">
-          <label for="pais">País *</label>
-          <input type="text" name="pais" id="pais" value="Brazil" disabled>
-        </div>
-
+        
         <button type="submit" class="submit-button">EFETUAR CADASTRO</button>
       </form>
     </div>
@@ -78,20 +67,21 @@
 </template>
 
 <script>
-import { RouterLink } from 'vue-router'
+import { RouterLink } from 'vue-router';
+import { ArrowLeft } from 'lucide-vue-next';
 
+export default {
+  components: {
+    ArrowLeft
+  }
+}
 
 </script>
 
 <style>
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
-
-
-
 .container {
-  max-width: 600px;
+  max-width: 37.5rem;
   margin: auto;
   font-family: 'poppins', sans-serif;
   color: #333;
@@ -100,15 +90,21 @@ import { RouterLink } from 'vue-router'
 .container_top_page {
   text-align: center;
   background-color: #f02424;
-  padding: 20px;
+  padding: 1.25rem;
   color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.texto_header{
+  display: flex;
+  flex-direction: column
 }
 
 .tabs {
   display: flex;
   justify-content: center;
-  margin: 20px 0;
-  font-family: 'Rovoto mono', sans-serif;
+  margin: 1.25rem 0;
 }
 
 .tab {
@@ -116,47 +112,56 @@ import { RouterLink } from 'vue-router'
   border: none;
   font-weight: bold;
   color: #333;
-  padding: 10px 20px;
+  padding: .625rem 1.25rem;
   cursor: pointer;
 }
 
 .tab.active {
-  border-bottom: 2px solid #d81b60;
+  border-bottom: .125rem solid #f02424;
+}
+
+.button_sair{
+  padding: .625rem 1.25rem;
+  background-color: #2c3e50;
+  cursor: pointer;
+  max-width: 4.0625rem;
+  border-radius: .3125rem;
+  color: white
 }
 
 .box-info {
-  padding: 20px;
+  padding: 1.25rem;
   background-color: #f9f9f9;
-  border-radius: 8px;
+  border-radius: .5rem;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  margin-bottom: 15px;
-  border-radius: 10px;
+  margin-bottom: .9375rem;
+  border-radius: .625rem;
 }
 
 label {
-  margin-bottom: 5px;
+  margin-bottom: .3125rem;
   font-weight: bold;
 }
 
 input, select {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  padding: .625rem;
+  border: .0625rem solid #ddd;
+  border-radius: .25rem;
 }
 
 .submit-button {
   width: 100%;
-  padding: 15px;
-  background-color: #f02424;
+  padding: .9375rem;
+  background-color: #2c3e50;
   color: white;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: bold;
   border: none;
-  border-radius: 20px;
+  border-radius: 1.25rem;
   cursor: pointer;
 }
 
@@ -166,7 +171,7 @@ input, select {
 
 .footer {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 1.25rem;
 }
 
 .footer a {
@@ -180,6 +185,6 @@ input, select {
 
 
 .terms input {
-  margin-right: 10px;
+  margin-right: .625rem;
 }
 </style>

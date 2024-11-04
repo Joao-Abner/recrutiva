@@ -16,12 +16,12 @@
 </template>
 
 <script>
-import HomePage from './components/HomePage.vue';
+import HomeView from './views/HomeView.vue';
 
 export default {
   name: 'App',
   components: {
-    HomePage,
+    HomeView,
   },
 };
 </script>
