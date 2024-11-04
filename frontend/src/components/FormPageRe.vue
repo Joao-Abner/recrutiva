@@ -21,8 +21,13 @@
     <div class="box-info">
       <form>
         <div class="form-group">
-          <label for="nome">Nome da empresa *</label>
+          <label for="nome">Nome</label>
           <input type="text" name="nome" id="nome" placeholder="Nome" required>
+        </div>
+
+        <div class="form-group">
+          <label for="sobrenome">Sobrenome *</label>
+          <input type="text" name="sobrenome" id="sobrenome" placeholder="Sobrenome" required>
         </div>
 
         <div class="form-group">
@@ -38,21 +43,6 @@
         <div class="form-group">
           <label for="repetir_senha">Repetir senha *</label>
           <input type="password" name="repetir_senha" id="repetir_senha" placeholder="Repita sua senha" required>
-        </div>
-
-        <div class="form-group">
-          <label for="telefone">Telefone *</label>
-          <input type="tel" name="telefone" id="telefone" placeholder="Digite seu telefone" required>
-        </div>
-
-        <div class="form-group">
-          <label for="nascimento">CNPJ*</label>
-          <input type="text" name="cnpj" id="cnpj" placeholder="Digite o CNPJ" required>
-        </div>
-
-        <div class="form-group">
-          <label for="pais">País *</label>
-          <input type="text" name="pais" id="pais" value="Brazil" disabled>
         </div>
 
         <button type="submit" class="submit-button">EFETUAR CADASTRO</button>

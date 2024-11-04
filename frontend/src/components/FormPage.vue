@@ -14,7 +14,7 @@
     </div>
 
     <div class="tabs">
-      <RouterLink to="/loginre" class="tab ">JÁ SOU CADASTRADO</RouterLink>
+      <RouterLink to="/loginca" class="tab ">JÁ SOU CADASTRADO</RouterLink>
       <RouterLink to="/cadastro" class="tab active">QUERO ME CADASTRAR</RouterLink>
     </div>
 
@@ -36,7 +36,7 @@
           <input type="email" name="email" id="email" placeholder="Digite seu Email" required>
         </div>
 
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label for="sexo">Sexo *</label>
           <select name="sexo" id="sexo" required>
             <option value="">Selecione</option>
@@ -44,7 +44,7 @@
             <option value="feminino">Feminino</option>
             <option value="feminino">Outro</option>
           </select>
-        </div>
+        </div> -->
 
         <div class="form-group">
           <label for="senha">Senha *</label>
@@ -55,27 +55,7 @@
           <label for="repetir_senha">Repetir senha *</label>
           <input type="password" name="repetir_senha" id="repetir_senha" placeholder="Repita sua senha" required>
         </div>
-
-        <div class="form-group">
-          <label for="email">CPF *</label>
-          <input type="text" name="cpf" id="cpf" placeholder="Digite seu CPF" required>
-        </div>
-
-        <div class="form-group">
-          <label for="telefone">Telefone *</label>
-          <input type="tel" name="telefone" id="telefone" placeholder="Digite seu telefone" required>
-        </div>
-
-        <div class="form-group">
-          <label for="nascimento">Data de nascimento *</label>
-          <input type="date" name="nascimento" id="nascimento" required>
-        </div>
-
-        <div class="form-group">
-          <label for="pais">País *</label>
-          <input type="text" name="pais" id="pais" value="Brazil" disabled>
-        </div>
-
+        
         <button type="submit" class="submit-button">EFETUAR CADASTRO</button>
       </form>
     </div>
