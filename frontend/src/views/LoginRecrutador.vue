@@ -14,7 +14,7 @@
     </div>
   
       <div class="tabs">
-        <RouterLink to="/loginre" class="tab ">JÁ SOU CADASTRADO</RouterLink>
+        <RouterLink to="/loginre" class="tab">JÁ SOU CADASTRADO</RouterLink>
         <RouterLink to="/cadastrore" class="tab active">QUERO ME CADASTRAR</RouterLink>
       </div>
   
@@ -22,12 +22,12 @@
         <form>
   
           <div class="form-group">
-            <label for="email">Email *</label>
+            <label for="email">Email</label>
             <input type="email" name="email" id="email" placeholder="Digite seu Email" required>
           </div>
   
           <div class="form-group">
-            <label for="senha">Senha *</label>
+            <label for="senha">Senha</label>
             <input type="password" name="senha" id="senha" placeholder="Digite sua senha" required>
           </div>
   

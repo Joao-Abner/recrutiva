@@ -14,7 +14,7 @@
     </div>
 
     <div class="tabs">
-      <RouterLink to="/loginca" class="tab ">JÁ SOU CADASTRADO</RouterLink>
+      <RouterLink to="/loginca" class="tab">JÁ SOU CADASTRADO</RouterLink>
       <RouterLink to="/cadastro" class="tab active">QUERO ME CADASTRAR</RouterLink>
     </div>
 
@@ -22,37 +22,27 @@
     <div class="box-info">
       <form>
         <div class="form-group">
-          <label for="nome">Nome *</label>
+          <label for="nome">Nome</label>
           <input type="text" name="nome" id="nome" placeholder="Nome" required>
         </div>
 
         <div class="form-group">
-          <label for="sobrenome">Sobrenome *</label>
+          <label for="sobrenome">Sobrenome</label>
           <input type="text" name="sobrenome" id="sobrenome" placeholder="Sobrenome" required>
         </div>
 
         <div class="form-group">
-          <label for="email">Email *</label>
+          <label for="email">Email</label>
           <input type="email" name="email" id="email" placeholder="Digite seu Email" required>
         </div>
 
-        <!-- <div class="form-group">
-          <label for="sexo">Sexo *</label>
-          <select name="sexo" id="sexo" required>
-            <option value="">Selecione</option>
-            <option value="masculino">Masculino</option>
-            <option value="feminino">Feminino</option>
-            <option value="feminino">Outro</option>
-          </select>
-        </div> -->
-
         <div class="form-group">
-          <label for="senha">Senha *</label>
+          <label for="senha">Senha</label>
           <input type="password" name="senha" id="senha" placeholder="Digite sua senha" required>
         </div>
 
         <div class="form-group">
-          <label for="repetir_senha">Repetir senha *</label>
+          <label for="repetir_senha">Repetir senha</label>
           <input type="password" name="repetir_senha" id="repetir_senha" placeholder="Repita sua senha" required>
         </div>
         
