@@ -51,7 +51,11 @@
     </div>
 
     <div class="footer">
-      <p>Problemas com seu cadastro? <a href="#">Clique para acessar como recrutador</a></p>
+      <!-- <p>Problemas com seu cadastro? <a href="#">Clique para acessar como recrutador</a></p> -->
+      Problemas com seu cadastro?
+      <Routerlink to="/loginre" class="users-links">
+        Clique para acessar como recrutador
+      </Routerlink>
     </div>
   </div>
 </template>
@@ -161,15 +165,17 @@ input, select {
 
 .footer {
   text-align: center;
-  margin-top: 1.25rem;
+  margin-top: .25rem;
+  margin-bottom: 3.25rem;
 }
 
-.footer a {
+.users-links {
   color: #f02424;
   text-decoration: none;
+  cursor: pointer;
 }
 
-.footer a:hover {
+.users-links:hover {
   text-decoration: underline;
 }
 
