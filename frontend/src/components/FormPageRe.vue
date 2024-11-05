@@ -23,7 +23,7 @@
       id="registrationForm">
         <div class="form-group">
           <label for="nome">Nome</label>
-          <input type="text" name="nome" v-model="formData.firs_name"  placeholder="Nome" required>
+          <input type="text" name="nome" v-model="formData.first_name"  placeholder="Nome" required>
         </div>
 
         <div class="form-group">
@@ -38,7 +38,7 @@
 
         <div class="form-group">
           <label for="senha">Senha *</label>
-          <input type="password" name="senha" v-model="formData.passowrd"  placeholder="Digite sua senha" required>
+          <input type="password" name="senha" v-model="formData.password"  placeholder="Digite sua senha" required>
         </div>
 
         <div class="form-group">
@@ -68,7 +68,8 @@ export default {
     data() {
         return {
             formData: {
-                name: '',
+                first_name: '',
+                last_name: '',
                 email: '',
                 password: '',
                 password_confirmation: ''
@@ -81,6 +82,7 @@ export default {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Accept' : 'application/json',
                 },
                 body: JSON.stringify(this.formData),
             })
