@@ -19,30 +19,31 @@
     </div>
 
     <div class="box-info">
-      <form>
+      <form @submit.prevent="handleSubmit" 
+      id="registrationForm">
         <div class="form-group">
           <label for="nome">Nome</label>
-          <input type="text" name="nome" id="nome" placeholder="Nome" required>
+          <input type="text" name="nome" v-model="formData.firs_name"  placeholder="Nome" required>
         </div>
 
         <div class="form-group">
           <label for="sobrenome">Sobrenome *</label>
-          <input type="text" name="sobrenome" id="sobrenome" placeholder="Sobrenome" required>
+          <input type="text" name="sobrenome" v-model="formData.last_name"  placeholder="Sobrenome" required>
         </div>
 
         <div class="form-group">
           <label for="email">Email *</label>
-          <input type="email" name="email" id="email" placeholder="Digite seu Email" required>
+          <input type="email" name="email" v-model="formData.email"  placeholder="Digite seu Email" required>
         </div>
 
         <div class="form-group">
           <label for="senha">Senha *</label>
-          <input type="password" name="senha" id="senha" placeholder="Digite sua senha" required>
+          <input type="password" name="senha" v-model="formData.passowrd"  placeholder="Digite sua senha" required>
         </div>
 
         <div class="form-group">
           <label for="repetir_senha">Repetir senha *</label>
-          <input type="password" name="repetir_senha" id="repetir_senha" placeholder="Repita sua senha" required>
+          <input type="password" name="repetir_senha" v-model="formData.password_confirmation"  placeholder="Repita sua senha" required>
         </div>
 
         <button type="submit" class="submit-button">EFETUAR CADASTRO</button>
@@ -62,8 +63,38 @@ import { ArrowLeft } from 'lucide-vue-next';
 export default {
   components: {
     ArrowLeft
-  }
+  },
+
+    data() {
+        return {
+            formData: {
+                name: '',
+                email: '',
+                password: '',
+                password_confirmation: ''
+            }
+        };
+    },
+    methods: {
+        handleSubmit() {
+            fetch('http://localhost:8001/api/register-recruiter', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(this.formData),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    }
 }
+
 
 </script>
 
