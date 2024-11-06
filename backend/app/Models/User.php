@@ -35,6 +35,16 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    // Método para verificar se o usuário é recrutador
+    public function isRecruiter() {
+        return $this->role === 'recruiter'; // Verifica se o campo 'role' é igual a 'recruiter'
+    }
+
+    // Método para verificar se o usuário é candidato
+    public function isCandidate() {
+        return $this->role === 'candidate'; // Verifica se o campo 'role' é igual a 'candidate'
+    }
+
     /**
      * The attributes that should be cast.
      *
