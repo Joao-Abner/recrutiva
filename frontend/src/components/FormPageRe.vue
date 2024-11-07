@@ -60,6 +60,8 @@
 import { RouterLink } from 'vue-router';
 import { ArrowLeft } from 'lucide-vue-next';
 
+import axios from 'axios';
+
 export default {
   components: {
     ArrowLeft
