@@ -18,12 +18,18 @@ class JobController extends Controller
         $this->validate($request, [
             'title' => 'required|string|max:255',
             'description' => 'required|string',
+            'salary' => 'required|numeric',
+            'location' => 'required|string|max:255',
+            'requirements' => 'required|string',
         ]);
 
         Job::create([
+            'recruiter_id' => Auth::id(), // Associa a vaga ao recrutador logado
             'title' => $request->title,
             'description' => $request->description,
-            'recruiter_id' => Auth::id(), // Associa a vaga ao recrutador logado
+            'salary' => 'required|numeric',
+            'location' => 'required|string|max:255',
+            'requirements' => 'required|string',
         ]);
 
         return redirect()->route('jobs.index')->with('success', 'Job created successfully!');

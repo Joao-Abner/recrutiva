@@ -24,6 +24,9 @@ Route::post('/register-recruiter', [UserController::class, 'registerRecruiter'])
 Route::post('/login-recruiter', [AuthController::class, 'loginRecruiter']);
 Route::post('/login-candidate', [AuthController::class, 'loginCandidate']);
 
+// Rota para criar vagas
+Route::post('/jobs/create', [JobController::class, 'store']);
+
 // Rotas protegidas
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
