@@ -19,16 +19,17 @@
       </div>
   
       <div class="box-info">
-        <form>
+        <form @submit.prevent="handleSubmit" 
+        id="registrationForm">
   
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" name="email" id="email" placeholder="Digite seu Email" required>
+            <input type="email" name="email" v-model="formData.email" placeholder="Digite seu Email" required>
           </div>
   
           <div class="form-group">
             <label for="senha">Senha</label>
-            <input type="password" name="senha" id="senha" placeholder="Digite sua senha" required>
+            <input type="password" name="senha" v-model="formData.password" placeholder="Digite sua senha" required>
           </div>
   
           <button type="submit" class="submit-button">EFETUAR LOGIN</button>
@@ -36,7 +37,9 @@
       </div>
   
       <div class="footer">
-        <p>Problemas com seu cadastro? <a href="#">Clique para contatar o suporte</a></p>
+      <Routerlink to="/loginca" class="users-links">
+        Clique para acessar como Candidato
+      </Routerlink>
       </div>
     </div>
   </template>
@@ -45,11 +48,42 @@
 import { RouterLink } from 'vue-router';
 import { ArrowLeft } from 'lucide-vue-next';
 
+import axios from 'axios';
+
 export default {
   components: {
     ArrowLeft
-  }
+  },
+
+    data() {
+        return {
+            formData: {
+                email: '',
+                password: '',
+            }
+        };
+    },
+    methods: {
+        handleSubmit() {
+            fetch('http://localhost:8001/api/login-recruiter', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept' : 'application/json',
+                },
+                body: JSON.stringify(this.formData),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    }
 }
+
 
 </script>
 
@@ -126,6 +160,16 @@ input, select {
   padding: .625rem;
   border: .0625rem solid #ddd;
   border-radius: .25rem;
+}
+
+.users-links {
+  color: #f02424;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.users-links:hover {
+  text-decoration: underline;
 }
 
 .submit-button {

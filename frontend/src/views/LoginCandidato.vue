@@ -19,7 +19,8 @@
       </div>
   
       <div class="box-info">
-        <form>
+        <form @submit.prevent="handleSubmit" 
+        id="registrationForm">
   
           <div class="form-group">
             <label for="email">Email</label>
@@ -45,13 +46,45 @@
 import { RouterLink } from 'vue-router';
 import { ArrowLeft } from 'lucide-vue-next';
 
+import axios from 'axios';
+
 export default {
   components: {
     ArrowLeft
-  }
+  },
+
+    data() {
+        return {
+            formData: {
+                email: '',
+                password: '',
+            }
+        };
+    },
+    methods: {
+        handleSubmit() {
+            fetch('http://localhost:8001/api/login-recruiter', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept' : 'application/json',
+                },
+                body: JSON.stringify(this.formData),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    }
 }
 
+
 </script>
+
 
 <style>
 
