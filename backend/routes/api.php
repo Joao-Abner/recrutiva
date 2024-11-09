@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\JobController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,10 +25,9 @@ Route::post('/register-recruiter', [UserController::class, 'registerRecruiter'])
 Route::post('/login-recruiter', [AuthController::class, 'loginRecruiter']);
 Route::post('/login-candidate', [AuthController::class, 'loginCandidate']);
 
-// Rota para criar vagas
-Route::post('/jobs/create', [JobController::class, 'store']);
-
 // Rotas protegidas
+Route::middleware('auth:sanctum')->post('/jobs/create', [JobController::class, 'store']);
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 });

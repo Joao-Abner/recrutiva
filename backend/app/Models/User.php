@@ -35,6 +35,11 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function jobs()
+    {
+        return $this->hasMany(Job::class, 'user_id');
+    } 
+
     // Método para verificar se o usuário é recrutador
     public function isRecruiter() {
         return $this->role === 'recruiter'; // Verifica se o campo 'role' é igual a 'recruiter'
