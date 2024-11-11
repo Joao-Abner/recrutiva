@@ -48,6 +48,30 @@ class JobController extends Controller
     public function index()
     {
         $jobs = Job::all(); // Recupera todas as vagas
-        return view('jobs.index', compact('jobs'));
+        return response()->json($jobs); // Retorna as vagas em formato JSON
     }
+
+    public function edit($id)
+    {
+        // Editar uma vaga específica
+        $job = Job::where('user_id', auth()->id())->findOrFail($id);
+        return view('jobs.edit', compact('job'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        // Atualizar uma vaga específica
+        $job = Job::where('user_id', auth()->id())->findOrFail($id);
+        $job->update($request->all());
+        return redirect()->route('jobs.index')->with('success', 'Job updated successfully!');
+    }
+
+    public function destroy($id)
+    {
+        // Deletar uma vaga específica
+        $job = Job::where('user_id', auth()->id())->findOrFail($id);
+        $job->delete();
+        return redirect()->route('jobs.index')->with('success', 'Job deleted successfully!');
+    }
+
 }
