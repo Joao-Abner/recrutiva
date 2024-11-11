@@ -8,32 +8,35 @@ use Illuminate\Support\Facades\Auth;
 
 class JobController extends Controller
 {
-    
-    public function create()
+    /**
+     * Display a listing of the jobs.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function index(): \Illuminate\Http\JsonResponse
     {
-        return view('jobs.create'); // Formulário para criar vaga
+        $jobs = Job::all(); // Recupera todas as vagas
+        return response()->json($jobs); // Retorna as vagas em formato JSON
     }
-    
-    public function store(Request $request)
+
+    /**
+     * Store a newly created job in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function store(Request $request): \Illuminate\Http\JsonResponse
     {
-        
-        $this->validate($request, [
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'salary' => 'required|numeric',
-            'location' => 'required|string|max:255',
-            'requirements' => 'required|string',
-        ]);
-        
+        $this->validateJob($request); // Valida os dados da vaga
+
         // Verifica se o usuário está autenticado
         if (!Auth::check()) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 
-        // $validate['user_id']= Auth::user()->id;
-
-        Job::create([
-            'user_id' => Auth::id(), // Associa a vaga ao recrutador logado
+        // Cria a nova vaga associada ao recrutador logado
+        $job = Job::create([
+            'user_id' => Auth::id(),
             'title' => $request->title,
             'description' => $request->description,
             'salary' => $request->salary,
@@ -41,37 +44,69 @@ class JobController extends Controller
             'requirements' => $request->requirements,
         ]);
 
-        // return redirect()->route('jobs.index')->with('success', 'Job created successfully!');
-        return response()->json(['message' => 'Job created successfully!'], 201);
+        return response()->json(['message' => 'Job created successfully!', 'job' => $job], 201);
     }
 
-    public function index()
+    /**
+     * Display the specified job.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function show(int $id): \Illuminate\Http\JsonResponse
     {
-        $jobs = Job::all(); // Recupera todas as vagas
-        return response()->json($jobs); // Retorna as vagas em formato JSON
-    }
-
-    public function edit($id)
-    {
-        // Editar uma vaga específica
+        // Retornar uma vaga específica
         $job = Job::where('user_id', auth()->id())->findOrFail($id);
-        return view('jobs.edit', compact('job'));
+        return response()->json($job);
     }
 
-    public function update(Request $request, $id)
+    /**
+     * Update the specified job in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update(Request $request, int $id): \Illuminate\Http\JsonResponse
     {
         // Atualizar uma vaga específica
+        $this->validateJob($request); // Valida os dados da vaga
+
         $job = Job::where('user_id', auth()->id())->findOrFail($id);
         $job->update($request->all());
-        return redirect()->route('jobs.index')->with('success', 'Job updated successfully!');
+
+        return response()->json(['message' => 'Job updated successfully!', 'job' => $job]);
     }
 
-    public function destroy($id)
+    /**
+     * Remove the specified job from storage.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy(int $id): \Illuminate\Http\JsonResponse
     {
         // Deletar uma vaga específica
         $job = Job::where('user_id', auth()->id())->findOrFail($id);
         $job->delete();
-        return redirect()->route('jobs.index')->with('success', 'Job deleted successfully!');
+
+        return response()->json(['message' => 'Job deleted successfully!']);
     }
 
+    /**
+     * Validate the job data.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return void
+     */
+    protected function validateJob(Request $request): void
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'salary' => 'required|numeric',
+            'location' => 'required|string|max:255',
+            'requirements' => 'required|string',
+        ]);
+    }
 }
