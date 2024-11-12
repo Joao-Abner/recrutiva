@@ -15,7 +15,8 @@ class JobController extends Controller
      */
     public function index(): \Illuminate\Http\JsonResponse
     {
-        $jobs = Job::all(); // Recupera todas as vagas
+        // Recupera apenas as vagas do recrutador logado
+        $jobs = Job::where('user_id', Auth::id())->get();
         return response()->json($jobs); // Retorna as vagas em formato JSON
     }
 
