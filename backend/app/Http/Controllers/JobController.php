@@ -30,8 +30,8 @@ class JobController extends Controller
     {
         $this->validateJob($request); // Valida os dados da vaga
 
-        // Verifica se o usuário está autenticado
-        if (!Auth::check()) {
+        // Verifica se o usuário está autenticado e se é um recrutador
+        if (!Auth::check() || Auth::user()->role !== 'recruiter') {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 
