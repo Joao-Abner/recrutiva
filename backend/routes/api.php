@@ -27,6 +27,9 @@ Route::prefix('auth')->group(function () {
     Route::post('/login-candidate', [AuthController::class, 'loginCandidate']);
 });
 
+// Rotas jobs pública 
+Route::get('/jobs', [JobController::class, 'index']); // Listar todas as vagas
+
 // Rotas protegidas que requerem autenticação
 Route::middleware('auth:sanctum')->group(function () {
     // Logout
@@ -35,7 +38,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // Rotas para gerenciamento de vagas
     Route::prefix('jobs')->group(function () {
         Route::post('/create', [JobController::class, 'store']); // Criar vaga
-        Route::get('/', [JobController::class, 'index']); // Listar vagas
+        Route::get('/my-jobs', [JobController::class, 'myJobs']); // Listar vagas do recrutador logado
         Route::get('/{id}', [JobController::class, 'show']); // Exibir uma vaga específica
         Route::put('/{id}', [JobController::class, 'update']); // Atualizar vaga
         Route::delete('/{id}', [JobController::class, 'destroy']); // Deletar vaga
