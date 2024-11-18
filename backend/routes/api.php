@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\ApplicationController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +45,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('/my-jobs/{id}', [JobController::class, 'update']); // Atualizar vaga
         Route::delete('/my-jobs/{id}', [JobController::class, 'destroy']); // Deletar vaga
     });
+
+    // Rota para candidatar-se à vaga
+    Route::post('/jobs/{jobId}/apply', [ApplicationController::class, 'apply']); 
 
     // Rota para obter informações do usuário autenticado
     Route::get('/user', function (Request $request) {
