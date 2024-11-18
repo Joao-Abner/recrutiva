@@ -39,9 +39,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('jobs')->group(function () {
         Route::post('/create', [JobController::class, 'store']); // Criar vaga
         Route::get('/my-jobs', [JobController::class, 'myJobs']); // Listar vagas do recrutador logado
-        Route::get('/{id}', [JobController::class, 'show']); // Exibir uma vaga específica
-        Route::put('/{id}', [JobController::class, 'update']); // Atualizar vaga
-        Route::delete('/{id}', [JobController::class, 'destroy']); // Deletar vaga
+        Route::get('/my-jobs/{id}', [JobController::class, 'show']); // Exibir uma vaga específica
+        Route::put('/my-jobs/{id}', [JobController::class, 'update']); // Atualizar vaga
+        Route::delete('/my-jobs/{id}', [JobController::class, 'destroy']); // Deletar vaga
     });
 
     // Rota para obter informações do usuário autenticado
