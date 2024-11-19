@@ -46,8 +46,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/my-jobs/{id}', [JobController::class, 'destroy']); // Deletar vaga
     });
 
+    // Rota para listar candidatos de uma vaga do recrutador logado
+    Route::get('/my-jobs/{jobId}/candidates', [JobController::class, 'candidates']); 
+
     // Rota para candidatar-se à vaga
-    Route::post('/jobs/{jobId}/apply', [ApplicationController::class, 'apply']); 
+    Route::post('/jobs/{jobId}/apply', [ApplicationController::class, 'apply']);
+    
 
     // Rota para obter informações do usuário autenticado
     Route::get('/user', function (Request $request) {
