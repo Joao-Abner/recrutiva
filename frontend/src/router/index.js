@@ -45,11 +45,19 @@ const router = createRouter({
       }
     },
     {
-      path: '/dash',
-      name: 'Dash',
+      path: '/dashrecrutador',
+      name: 'DashRecrutador',
       component: () => import('../views/DashboardRecrutador.vue'),
       meta: {
-        title: 'Dash'
+        title: 'DashRecrutador'
+      }
+    },
+    {
+      path: '/dashcandidato',
+      name: 'DashCandidato',
+      component: () => import('../views/DashboardCandidato.vue'),
+      meta: {
+        title: 'DashCandidato'
       }
     },
     {
