@@ -38,11 +38,14 @@
           <button @click="viewJob(job.id)">👁️ Ver</button>
           <button @click="editJob(job.id)">✏️ Editar</button>
           <button @click="deleteJob(job.id)">🗑️ Deletar</button>
+          <button @click="candidatesJob(job.id)">👤 candidatos</button>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+
 
 <script>
 import axios from 'axios';

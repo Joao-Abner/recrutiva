@@ -52,6 +52,14 @@ const router = createRouter({
         title: 'Dash'
       }
     },
+    {
+      path: '/dashform',
+      name: 'DashForm',
+      component: () => import('../views/FormularioVagas.vue'),
+      meta: {
+        title: 'DashForm'
+      }
+    },
   ]
 })
 
