@@ -122,4 +122,25 @@ class JobController extends Controller
             'requirements' => 'required|string',
         ]);
     }
+
+    /**
+     * Display the list of candidates for a specific job.
+     *
+     * @param int $jobId
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function candidates($jobId): \Illuminate\Http\JsonResponse
+    {
+        // Verifica se a vaga pertence ao recrutador logado
+        $job = Job::where('id', $jobId)->where('user_id', Auth::id())->first();
+
+        if (!$job) {
+            return response()->json(['message' => 'Job not found or unauthorized'], 404);
+        }
+
+        // Recupera os candidatos associados à vaga
+        $candidates = $job->applications()->with('user')->get();
+
+        return response()->json($candidates);
+    }
 }

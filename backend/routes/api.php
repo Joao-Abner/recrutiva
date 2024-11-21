@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\ApplicationController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -35,14 +37,21 @@ Route::middleware('auth:sanctum')->group(function () {
     // Logout
     Route::post('/logout', [AuthController::class, 'logout']);
     
-    // Rotas para gerenciamento de vagas
-    Route::prefix('jobs')->group(function () {
+    // Rotas para gerenciamento de vagas do recrutador
+    Route::prefix('my-jobs')->group(function () {
+        Route::get('/', [JobController::class, 'myJobs']); // Listar vagas do recrutador logado
         Route::post('/create', [JobController::class, 'store']); // Criar vaga
-        Route::get('/my-jobs', [JobController::class, 'myJobs']); // Listar vagas do recrutador logado
         Route::get('/{id}', [JobController::class, 'show']); // Exibir uma vaga específica
         Route::put('/{id}', [JobController::class, 'update']); // Atualizar vaga
         Route::delete('/{id}', [JobController::class, 'destroy']); // Deletar vaga
+   
+        // Rota para listar candidatos de uma vaga do recrutador logado
+        Route::get('/{jobId}/candidates', [JobController::class, 'candidates']); 
     });
+
+    // Rota para candidatar-se à vaga
+    Route::post('/jobs/{jobId}/apply', [ApplicationController::class, 'apply']);
+    
 
     // Rota para obter informações do usuário autenticado
     Route::get('/user', function (Request $request) {
