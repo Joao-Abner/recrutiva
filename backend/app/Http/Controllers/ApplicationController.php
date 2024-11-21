@@ -19,11 +19,21 @@ class ApplicationController extends Controller
     {
         // Validação dos dados da candidatura
         $request->validate([
-            'resume' => 'nullable|string',
+            'resume' => 'nullable|string', // Permite texto livre para informações
         ]);
 
         // Verifica se a vaga existe e se é válida
         $job = Job::findOrFail($jobId);
+
+        // Verifica se o candidato já se inscreveu na vaga
+        $existingApplication = Application::where(
+            'job_id', $jobId)
+            ->where('user_id', Auth::id())
+            ->first();
+
+        if ($existingApplication) {
+            return response()->json(['message' => 'Você já se candidatou a esta vaga.'], 409); // Conflito
+        }
 
         // Cria a candidatura associando o usuário logado à vaga
         $application = Application::create([
