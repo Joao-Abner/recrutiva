@@ -1,6 +1,6 @@
 <template>
   <div class="job-listings">
-    <!-- <h1>Jobs</h1>
+    <h1>Jobs</h1>
 
     <div class="filters">
       <button>All ({{ jobs.length }})</button>
@@ -24,7 +24,7 @@
         <option>Select category</option>
       </select>
       <button>Filter</button>
-    </div> -->
+    </div>
 
 
     <div class="job-cards">
