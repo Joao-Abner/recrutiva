@@ -32,7 +32,7 @@
             <input type="password" name="senha" v-model="formData.password" placeholder="Digite sua senha" required>
           </div>
   
-          <button type="submit" class="submit-button">EFETUAR LOGIN</button>
+          <RouterLink to="/dashrecrutador" class="tab">Efetuar Login</RouterLink>
         </form>
       </div>
   
