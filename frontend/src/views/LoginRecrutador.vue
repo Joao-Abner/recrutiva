@@ -1,48 +1,47 @@
 <template>
-    <div class="container">
+  <div class="container">
     <div class="container_top_page">
-      
+
       <RouterLink to="/" class="button_sair">
         <ArrowLeft />
-      </RouterLink> 
-      
+      </RouterLink>
+
       <div class="texto_header">
         <h1>Olá, Recrutador!</h1>
-      
-      <p>Encontre o seu candidato ideal em empresas comprometidas com o seu futuro.</p>
+
+        <p>Encontre o seu candidato ideal em empresas comprometidas com o seu futuro.</p>
       </div>
     </div>
-  
-      <div class="tabs">
-        <RouterLink to="/loginre" class="tab">JÁ SOU CADASTRADO</RouterLink>
-        <RouterLink to="/cadastrore" class="tab active">QUERO ME CADASTRAR</RouterLink>
-      </div>
-  
-      <div class="box-info">
-        <form @submit.prevent="handleSubmit" 
-        id="registrationForm">
-  
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" name="email" v-model="formData.email" placeholder="Digite seu Email" required>
-          </div>
-  
-          <div class="form-group">
-            <label for="senha">Senha</label>
-            <input type="password" name="senha" v-model="formData.password" placeholder="Digite sua senha" required>
-          </div>
-  
-          <RouterLink to="/dashrecrutador" class="tab">Efetuar Login</RouterLink>
-        </form>
-      </div>
-  
-      <div class="footer">
+
+    <div class="tabs">
+      <RouterLink to="/loginre" class="tab">JÁ SOU CADASTRADO</RouterLink>
+      <RouterLink to="/cadastrore" class="tab active">QUERO ME CADASTRAR</RouterLink>
+    </div>
+
+    <div class="box-info">
+      <form @submit.prevent="handleSubmit" id="registrationForm">
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" name="email" v-model="formData.email" placeholder="Digite seu Email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="senha">Senha</label>
+          <input type="password" name="senha" v-model="formData.password" placeholder="Digite sua senha" required>
+        </div>
+
+        <RouterLink to="/dashrecrutador" class="tab">Efetuar Login</RouterLink>
+      </form>
+    </div>
+
+    <div class="footer">
       <Routerlink to="/loginca" class="users-links">
         Clique para acessar como Candidato
       </Routerlink>
-      </div>
     </div>
-  </template>
+  </div>
+</template>
 
 <script>
 import { RouterLink } from 'vue-router';
@@ -55,40 +54,54 @@ export default {
     ArrowLeft
   },
 
-    data() {
-        return {
-            formData: {
-                email: '',
-                password: '',
-            }
-        };
-    },
-    methods: {
-        handleSubmit() {
-            fetch('http://localhost:8001/api/login-recruiter', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept' : 'application/json',
-                },
-                body: JSON.stringify(this.formData),
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-        }
+  data() {
+    return {
+      formData: {
+        email: '',
+        password: '',
+      }
+    };
+  },
+  // methods: {
+  //     handleSubmit() {
+  //         fetch('http://localhost:8001/api/login-recruiter', {
+  //             method: 'POST',
+  //             headers: {
+  //                 'Content-Type': 'application/json',
+  //                 'Accept' : 'application/json',
+  //             },
+  //             body: JSON.stringify(this.formData),
+  //         })
+  //         .then(response => response.json())
+  //         .then(data => {
+  //             console.log('Success:', data);
+  //         })
+  //         .catch((error) => {
+  //             console.error('Error:', error);
+  //         });
+  //     }
+  // }
+  methods: {
+    async login() {
+      try {
+        const response = await axios.post('http://localhost:8001/api/auth/login-recruiter', {
+          email: this.email,
+          password: this.password,
+        });
+        const token = response.data.token; // Supondo que o token esteja na resposta
+        localStorage.setItem('token', token); // Armazena o token no localStorage
+        this.$router.push('/my-jobs'); // Redireciona para a página de vagas
+      } catch (error) {
+        console.error("Erro ao fazer login:", error);
+      }
     }
+  }
 }
 
 
 </script>
 
 <style>
-
 .container {
   max-width: 37.5rem;
   margin: auto;
@@ -105,7 +118,7 @@ export default {
   flex-direction: column;
 }
 
-.texto_header{
+.texto_header {
   display: flex;
   flex-direction: column
 }
@@ -129,7 +142,7 @@ export default {
   border-bottom: .125rem solid #f02424;
 }
 
-.button_sair{
+.button_sair {
   padding: .625rem 1.25rem;
   background-color: #2c3e50;
   cursor: pointer;
@@ -156,7 +169,8 @@ label {
   font-weight: bold;
 }
 
-input, select {
+input,
+select {
   padding: .625rem;
   border: .0625rem solid #ddd;
   border-radius: .25rem;
