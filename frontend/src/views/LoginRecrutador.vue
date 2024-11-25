@@ -46,6 +46,7 @@
 <script>
 import { RouterLink } from 'vue-router';
 import { ArrowLeft } from 'lucide-vue-next';
+import { mapActions } from 'vuex';
 
 import axios from 'axios';
 
@@ -62,42 +63,20 @@ export default {
       }
     };
   },
-  // methods: {
-  //     handleSubmit() {
-  //         fetch('http://localhost:8001/api/login-recruiter', {
-  //             method: 'POST',
-  //             headers: {
-  //                 'Content-Type': 'application/json',
-  //                 'Accept' : 'application/json',
-  //             },
-  //             body: JSON.stringify(this.formData),
-  //         })
-  //         .then(response => response.json())
-  //         .then(data => {
-  //             console.log('Success:', data);
-  //         })
-  //         .catch((error) => {
-  //             console.error('Error:', error);
-  //         });
-  //     }
-  // }
   methods: {
-    async login() {
+    ...mapActions(['loginRecruiter']), // Mapeia a ação de login do Vuex
+
+    async handleSubmit() {
       try {
-        const response = await axios.post('http://localhost:8001/api/auth/login-recruiter', {
-          email: this.email,
-          password: this.password,
-        });
-        const token = response.data.token; // Supondo que o token esteja na resposta
-        localStorage.setItem('token', token); // Armazena o token no localStorage
-        this.$router.push('/my-jobs'); // Redireciona para a página de vagas
+        await this.loginRecruiter(this.formData); // Chama a ação de login
+        this.$router.push('/my-jobs'); // Redireciona após login bem-sucedido
       } catch (error) {
         console.error("Erro ao fazer login:", error);
+        // Aqui você pode adicionar lógica para exibir uma mensagem de erro ao usuário
       }
     }
   }
 }
-
 
 </script>
 
