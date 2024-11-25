@@ -45,6 +45,7 @@
 <script>
 import { RouterLink } from 'vue-router';
 import { ArrowLeft } from 'lucide-vue-next';
+import { mapActions } from 'vuex';
 
 import axios from 'axios';
 
@@ -52,7 +53,6 @@ export default {
   components: {
     ArrowLeft
   },
-
     data() {
         return {
             formData: {
@@ -62,26 +62,18 @@ export default {
         };
     },
     methods: {
-        handleSubmit() {
-            fetch('http://localhost:8001/api/login-recruiter', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept' : 'application/json',
-                },
-                body: JSON.stringify(this.formData),
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-        }
-    }
-}
+      ...mapActions(['loginCandidate']), // Mapeia a ação de login do Vuex
 
+      async handleSubmit() {
+        try {
+          await this.loginCandidate(this.formData); // Chama a ação de login
+          this.$router.push('/dashcandidato'); // Redireciona após login bem-sucedido
+        } catch (error) {
+          console.error("Erro ao fazer login:", error);
+        }
+      },
+    },
+};
 
 </script>
 
