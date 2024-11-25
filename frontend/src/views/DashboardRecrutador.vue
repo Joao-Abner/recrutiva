@@ -57,22 +57,33 @@ export default {
       console.log("Visualizando vaga:", id);
     },
 
-    // Editar vaga
-    async editJob(id) {
-      const newTitle = prompt("Digite o novo título da vaga:"); // Exemplo simples de edição
-      if (newTitle) {
-        try {
-          await axios.put(`http://localhost:8001/api/jobs/${id}`, { title: newTitle });
-          alert("Vaga atualizada com sucesso!");
-          this.fetchJobs(); // Atualiza a lista de vagas após a edição
-        } catch (error) {
-          console.error("Erro ao editar a vaga:", error);
-          alert("Falha ao editar a vaga.");
-        }
+    async editJob(job) {
+      // Solicitar novas informações
+      const updatedJob = {
+        title: prompt("Digite o novo título da vaga:", job.title),
+        description: prompt("Digite a nova descrição da vaga:", job.description),
+        salary: prompt("Digite o novo salário da vaga:", job.salary),
+        location: prompt("Digite a nova localização da vaga:", job.location),
+        requirements: prompt("Digite os novos requisitos da vaga:", job.requirements),
+      };
+
+      // Validar se o usuário forneceu algum campo
+      if (Object.values(updatedJob).some((field) => field === null)) {
+        alert("Edição cancelada.");
+        return;
+      }
+
+      try {
+        // Enviar atualização para a API
+        await axios.put(`http://localhost:8001/api/jobs/${job.id}`, updatedJob);
+        alert("Vaga atualizada com sucesso!");
+        this.fetchJobs(); // Atualizar lista de vagas
+      } catch (error) {
+        console.error("Erro ao editar a vaga:", error);
+        alert("Falha ao editar a vaga.");
       }
     },
 
-    // Deletar vaga
     async deleteJob(id) {
       if (confirm("Você tem certeza que deseja deletar esta vaga?")) {
         try {

@@ -35,7 +35,6 @@
           <p><strong>Localização:</strong> {{ job.location }}</p>
           <p><strong>Requisitos:</strong> {{ job.requirements }}</p>
           <div class="actions">
-            <button @click="viewJob(job.id)">👁️ Ver</button>
             <button @click="aceptJob(job.id)">✔️ Candidatar-se</button> //criar caminho q vai para o Candidatar-se
             <button @click="deleteJob(job.id)">🗑️ Deletar</button>
           </div>
