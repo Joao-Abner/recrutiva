@@ -6,7 +6,7 @@
         <h1 class="logo-text">RECRUTIVA</h1>
       </div>
       <div class="header-actions">
-        <button @click="goBack" class="back-button">VOLTAR</button>
+        <button @click="logout" class="back-button">SAIR</button>
         <button @click="showAddModal = true" class="add-button">ADICIONAR</button>
       </div>
     </header>
@@ -91,9 +91,9 @@
   </div>
 </template>
 
-
 <script>
 import axios from "axios";
+import { mapActions } from "vuex";
 
 export default {
   name: "JobListings",
@@ -120,6 +120,8 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["logoutAction"]),
+
     async fetchJobs() {
       try {
         const response = await axios.get("http://localhost:8001/api/jobs");
@@ -128,8 +130,13 @@ export default {
         console.error("Erro ao buscar vagas:", error);
       }
     },
-    goBack() {
-      window.history.back();
+    async logout() {
+      try {
+        await this.logoutAction();
+        this.$router.push("/loginre");
+      } catch (error) {
+        console.error("Erro ao realizar logout:", error);
+      }
     },
     async addJob() {
       try {
@@ -144,7 +151,7 @@ export default {
       }
     },
     openEditModal(job) {
-      this.editJobData = { ...job }; // Preenche o modal com os dados da vaga selecionada
+      this.editJobData = { ...job };
       this.showEditModal = true;
     },
     async updateJob() {
@@ -177,8 +184,6 @@ export default {
 };
 </script>
 
-
-
 <style scoped>
 
 
@@ -200,7 +205,7 @@ export default {
   font-size: 14px;
   font-weight: bold;
   color: #fff;
-  background-color: #007bff;
+  background-color: #f44336;
   border: none;
   border-radius: 5px;
   padding: 8px 15px;
@@ -209,7 +214,7 @@ export default {
 }
 
 .add-button:hover {
-  background-color: #0056b3;
+  background-color: #e00000;
 }
 
 .modal {
@@ -248,7 +253,7 @@ export default {
 }
 
 .modal-actions button:first-child {
-  background-color: #007bff;
+  background-color: #f44336;
   color: #fff;
 }
 
@@ -303,8 +308,10 @@ export default {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  justify-content: center;
   padding: 20px;
 }
+
 
 .job-card {
   border: 1px solid #e0e0e0;
@@ -316,7 +323,7 @@ export default {
 
 .job-card h3 {
   font-size: 18px;
-  color: #007bff;
+  color: #f44336;
   margin-bottom: 10px;
 }
 
