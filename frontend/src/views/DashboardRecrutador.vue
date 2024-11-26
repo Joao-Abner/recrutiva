@@ -193,7 +193,7 @@ export default {
     },
     async updateJob() {
       try {
-        await axios.put(`http://localhost:8001/api/jobs/${this.editJobData.id}`, this.editJobData);
+        await axios.put(`http://localhost:8001/api/my-jobs/${this.editJobData.id}`, this.editJobData);
         alert("Vaga atualizada com sucesso!");
         this.showEditModal = false;
         this.fetchJobs();
