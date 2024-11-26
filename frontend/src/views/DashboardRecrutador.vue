@@ -92,11 +92,12 @@
 </template>
 
 <script>
+import { mapGetters, mapState } from 'vuex'; // Importa mapState para acessar o estado do Vuex
 import axios from "axios";
 import { mapActions } from "vuex";
 
 export default {
-  name: "JobListings",
+  name: "DashBoardRecrutador",
   data() {
     return {
       jobs: [],
@@ -117,23 +118,59 @@ export default {
         location: "",
         requirements: "",
       },
+      loading: false, // Estado de carregamento
     };
+  },
+  computed: {
+    ...mapGetters(['authUser', 'token', 'role']),
   },
   methods: {
     ...mapActions(["logoutAction"]),
 
     async fetchJobs() {
+      this.loading = true; // Inicia o carregamento
+      console.log(this.token);
       try {
-        const response = await axios.get("http://localhost:8001/api/jobs");
+        const response = await axios.get("http://localhost:8001/api/my-jobs", {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        });
         this.jobs = response.data.data;
       } catch (error) {
         console.error("Erro ao buscar vagas:", error);
+        alert("Falha ao buscar vagas."); // Você pode substituir por uma notificação
+      } finally {
+        this.loading = false; // Finaliza o carregamento
       }
     },
-    async logout() {
+
+    goBack() {
+      window.history.back();
+    },
+
+    viewJob(id) {
+      this.$router.push({ name: 'JobDetails', params: { id } }); // Redireciona para a página de detalhes da vaga
+    },
+
+    async editJob(job) {
+      const updatedJob = {
+        title: prompt("Digite o novo título da vaga:", job.title),
+        description: prompt("Digite a nova descrição da vaga:", job.description),
+        salary: prompt("Digite o novo salário da vaga:", job.salary),
+        location: prompt("Digite a nova localização da vaga:", job.location),
+        requirements: prompt("Digite os novos requisitos da vaga:", job.requirements),
+      };
+
+      if (Object.values(updatedJob).some((field) => field === null || field.trim() === '')) {
+        alert("Edição cancelada. Todos os campos devem ser preenchidos.");
+        return;
+      }
+
       try {
-        await this.logoutAction();
-        this.$router.push("/loginre");
+        await axios.put(`http://localhost:8001/api/my-jobs/${job.id}`, updatedJob);
+        alert("Vaga atualizada com sucesso!");
+        this.fetchJobs();
       } catch (error) {
         console.error("Erro ao realizar logout:", error);
       }
@@ -168,7 +205,11 @@ export default {
     async deleteJob(id) {
       if (confirm("Você tem certeza que deseja deletar esta vaga?")) {
         try {
-          await axios.delete(`http://localhost:8001/api/jobs/${id}`);
+          await axios.delete(`http://localhost:8001/api/my-jobs/${id}`, {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        });
           alert("Vaga deletada com sucesso!");
           this.fetchJobs();
         } catch (error) {
@@ -182,6 +223,7 @@ export default {
     this.fetchJobs();
   },
 };
+
 </script>
 
 <style scoped>

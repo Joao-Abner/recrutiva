@@ -22,6 +22,12 @@ const mutations = {
   },
 };
 
+const getters = {
+  authUser: state => state.authUser,
+  token: state => state.token,
+  role: state => state.role,
+};
+
 // Definindo as ações
 const actions = {
   async loginRecruiter({ commit }, credentials) {
@@ -60,6 +66,7 @@ const store = createStore({
   state,
   mutations,
   actions,
+  getters,
   plugins: [createPersistedState()], // Adiciona o plugin para persistência
 });
 

@@ -31,7 +31,8 @@
           <input type="password" name="senha" v-model="formData.password" placeholder="Digite sua senha" required>
         </div>
 
-        <RouterLink to="/dashrecrutador" class="tab">Efetuar Login</RouterLink>
+        <!-- <RouterLink to="/dashrecrutador" class="tab">Efetuar Login</RouterLink> -->
+        <button type="submit" class="tab">Efetuar Login</button>
       </form>
     </div>
 
@@ -47,8 +48,6 @@
 import { RouterLink } from 'vue-router';
 import { ArrowLeft } from 'lucide-vue-next';
 import { mapActions } from 'vuex';
-
-import axios from 'axios';
 
 export default {
   components: {
@@ -69,10 +68,13 @@ export default {
     async handleSubmit() {
       try {
         await this.loginRecruiter(this.formData); // Chama a ação de login
-        this.$router.push('/my-jobs'); // Redireciona após login bem-sucedido
+        if (this.$store.getters.role !== 'recruiter') {
+          throw new Error('Usuário não é um recrutador');
+        }
+          this.$router.push('/dashrecrutador'); // Redireciona após login bem-sucedido
       } catch (error) {
         console.error("Erro ao fazer login:", error);
-        // Aqui você pode adicionar lógica para exibir uma mensagem de erro ao usuário
+        alert('Falha ao efetuar login. Verifique suas credenciais.');
       }
     }
   }
