@@ -5,10 +5,75 @@
         <img src="@/assets/logo-recrutiva.png" alt="Logo Recrutiva" class="logo" />
         <h1 class="logo-text">RECRUTIVA</h1>
       </div>
-      <button @click="goBack" class="back-button">VOLTAR</button>
+      <div class="header-actions">
+        <button @click="goBack" class="back-button">VOLTAR</button>
+        <button @click="showAddModal = true" class="add-button">ADICIONAR</button>
+      </div>
     </header>
 
-    <!-- Restante do código -->
+    <!-- Modal de Adicionar Vaga -->
+    <div v-if="showAddModal" class="modal">
+      <div class="modal-content">
+        <h2>Adicionar Nova Vaga</h2>
+        <label>
+          Título:
+          <input v-model="newJob.title" type="text" />
+        </label>
+        <label>
+          Descrição:
+          <textarea v-model="newJob.description"></textarea>
+        </label>
+        <label>
+          Salário:
+          <input v-model="newJob.salary" type="number" />
+        </label>
+        <label>
+          Localização:
+          <input v-model="newJob.location" type="text" />
+        </label>
+        <label>
+          Requisitos:
+          <textarea v-model="newJob.requirements"></textarea>
+        </label>
+        <div class="modal-actions">
+          <button @click="addJob">Salvar</button>
+          <button @click="showAddModal = false">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal de Editar Vaga -->
+    <div v-if="showEditModal" class="modal">
+      <div class="modal-content">
+        <h2>Editar Vaga</h2>
+        <label>
+          Título:
+          <input v-model="editJobData.title" type="text" />
+        </label>
+        <label>
+          Descrição:
+          <textarea v-model="editJobData.description"></textarea>
+        </label>
+        <label>
+          Salário:
+          <input v-model="editJobData.salary" type="number" />
+        </label>
+        <label>
+          Localização:
+          <input v-model="editJobData.location" type="text" />
+        </label>
+        <label>
+          Requisitos:
+          <textarea v-model="editJobData.requirements"></textarea>
+        </label>
+        <div class="modal-actions">
+          <button @click="updateJob">Salvar</button>
+          <button @click="showEditModal = false">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lista de Vagas -->
     <div class="job-cards">
       <div v-for="job in jobs" :key="job.id" class="job-card">
         <h3>{{ job.title }}</h3>
@@ -17,7 +82,7 @@
         <p><strong>Localização:</strong> {{ job.location }}</p>
         <p><strong>Requisitos:</strong> {{ job.requirements }}</p>
         <div class="actions">
-          <button @click="editJob(job.id)">✏️ Editar</button>
+          <button @click="openEditModal(job)">✏️ Editar</button>
           <button @click="deleteJob(job.id)">🗑️ Deletar</button>
           <button @click="candidatesJob(job.id)">👤 Candidatos</button>
         </div>
@@ -25,6 +90,7 @@
     </div>
   </div>
 </template>
+
 
 <script>
 import axios from "axios";
@@ -34,10 +100,26 @@ export default {
   data() {
     return {
       jobs: [],
+      showAddModal: false,
+      showEditModal: false,
+      newJob: {
+        title: "",
+        description: "",
+        salary: null,
+        location: "",
+        requirements: "",
+      },
+      editJobData: {
+        id: null,
+        title: "",
+        description: "",
+        salary: null,
+        location: "",
+        requirements: "",
+      },
     };
   },
   methods: {
-    // Buscar todas as vagas
     async fetchJobs() {
       try {
         const response = await axios.get("http://localhost:8001/api/jobs");
@@ -46,50 +128,42 @@ export default {
         console.error("Erro ao buscar vagas:", error);
       }
     },
-
-    // Voltar para a página anterior
     goBack() {
       window.history.back();
     },
-
-    // Visualizar vaga
-    viewJob(id) {
-      console.log("Visualizando vaga:", id);
-    },
-
-    async editJob(job) {
-      // Solicitar novas informações
-      const updatedJob = {
-        title: prompt("Digite o novo título da vaga:", job.title),
-        description: prompt("Digite a nova descrição da vaga:", job.description),
-        salary: prompt("Digite o novo salário da vaga:", job.salary),
-        location: prompt("Digite a nova localização da vaga:", job.location),
-        requirements: prompt("Digite os novos requisitos da vaga:", job.requirements),
-      };
-
-      // Validar se o usuário forneceu algum campo
-      if (Object.values(updatedJob).some((field) => field === null)) {
-        alert("Edição cancelada.");
-        return;
-      }
-
+    async addJob() {
       try {
-        // Enviar atualização para a API
-        await axios.put(`http://localhost:8001/api/jobs/${job.id}`, updatedJob);
-        alert("Vaga atualizada com sucesso!");
-        this.fetchJobs(); // Atualizar lista de vagas
+        await axios.post("http://localhost:8001/api/jobs", this.newJob);
+        alert("Vaga adicionada com sucesso!");
+        this.showAddModal = false;
+        this.newJob = { title: "", description: "", salary: null, location: "", requirements: "" };
+        this.fetchJobs();
       } catch (error) {
-        console.error("Erro ao editar a vaga:", error);
-        alert("Falha ao editar a vaga.");
+        console.error("Erro ao adicionar vaga:", error);
+        alert("Falha ao adicionar a vaga.");
       }
     },
-
+    openEditModal(job) {
+      this.editJobData = { ...job }; // Preenche o modal com os dados da vaga selecionada
+      this.showEditModal = true;
+    },
+    async updateJob() {
+      try {
+        await axios.put(`http://localhost:8001/api/jobs/${this.editJobData.id}`, this.editJobData);
+        alert("Vaga atualizada com sucesso!");
+        this.showEditModal = false;
+        this.fetchJobs();
+      } catch (error) {
+        console.error("Erro ao atualizar vaga:", error);
+        alert("Falha ao atualizar a vaga.");
+      }
+    },
     async deleteJob(id) {
       if (confirm("Você tem certeza que deseja deletar esta vaga?")) {
         try {
           await axios.delete(`http://localhost:8001/api/jobs/${id}`);
           alert("Vaga deletada com sucesso!");
-          this.fetchJobs(); // Atualiza a lista de vagas após a exclusão
+          this.fetchJobs();
         } catch (error) {
           console.error("Erro ao deletar a vaga:", error);
           alert("Falha ao deletar a vaga.");
@@ -103,6 +177,8 @@ export default {
 };
 </script>
 
+
+
 <style scoped>
 
 
@@ -113,6 +189,72 @@ export default {
   padding: 20px;
   background-color: #fff;
   border-bottom: 1px solid #e0e0e0;
+}
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.add-button {
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.add-button:hover {
+  background-color: #0056b3;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.modal-actions button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.modal-actions button:first-child {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.modal-actions button:last-child {
+  background-color: #f44336;
+  color: #fff;
 }
 
 
