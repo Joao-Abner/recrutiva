@@ -104,6 +104,8 @@ export default {
 </script>
 
 <style scoped>
+
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -112,6 +114,8 @@ export default {
   background-color: #fff;
   border-bottom: 1px solid #e0e0e0;
 }
+
+
 
 .logo-container {
   display: flex;
