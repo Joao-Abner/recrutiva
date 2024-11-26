@@ -177,7 +177,7 @@ export default {
     },
     async addJob() {
       try {
-        await axios.post("http://localhost:8001/api/jobs", this.newJob);
+        await axios.post("http://localhost:8001/api/my-jobs/create", this.newJob);
         alert("Vaga adicionada com sucesso!");
         this.showAddModal = false;
         this.newJob = { title: "", description: "", salary: null, location: "", requirements: "" };
