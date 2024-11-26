@@ -6,7 +6,7 @@
         <h1 class="logo-text">RECRUTIVA</h1>
       </div>
       <div class="header-actions">
-        <button @click="logout" class="back-button">SAIR</button>
+        <button @click="handleLogout" class="back-button">SAIR</button>
         <button @click="showAddModal = true" class="add-button">ADICIONAR</button>
       </div>
     </header>
@@ -125,8 +125,11 @@ export default {
     ...mapGetters(['authUser', 'token', 'role']),
   },
   methods: {
-    ...mapActions(["logoutAction"]),
-
+    ...mapActions(["logout"]),
+    async handleLogout() {
+      await this.logout();
+      this.$router.push('/loginre');
+    },
     async fetchJobs() {
       this.loading = true; // Inicia o carregamento
       console.log(this.token);

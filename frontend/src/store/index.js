@@ -20,12 +20,11 @@ const mutations = {
   setRole(state, role) {
     state.role = role; // Armazena o papel do usuário
   },
-};
-
-const getters = {
-  authUser: state => state.authUser,
-  token: state => state.token,
-  role: state => state.role,
+  CLEAR_TOKEN(state) {
+    state.authUser = null;
+    state.token = null;
+    state.role = null;
+  },
 };
 
 // Definindo as ações
@@ -34,9 +33,15 @@ const actions = {
     try {
       const response = await axios.post('http://localhost:8001/api/auth/login-recruiter', credentials);
       const token = response.data.access_token; // Obtém o token da resposta
+      const user = response.data.user;
+      const role = response.data.role;
+
       commit('setToken', token);
-      commit('setUser', response.data.user); // Supondo que você tenha um campo user na resposta
-      commit('setRole', 'recruiter'); // Define o papel como recrutador
+      commit('setUser', user);
+      commit('setRole', role); // Define o papel como recrutador
+
+
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     } catch (error) {
       console.error("Erro ao fazer login como recrutador:", error);
     }
@@ -46,19 +51,31 @@ const actions = {
     try {
       const response = await axios.post('http://localhost:8001/api/auth/login-candidate', credentials);
       const token = response.data.access_token; // Obtém o token da resposta
+      const user = response.data.user;
+      const role = response.data.role;
+
       commit('setToken', token);
-      commit('setUser', response.data.user); // Supondo que você tenha um campo user na resposta
-      commit('setRole', 'candidate'); // Define o papel como candidato
+      commit('setUser', user);
+      commit('setRole', role); // Define o papel como candidato
+
+
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     } catch (error) {
       console.error("Erro ao fazer login como candidato:", error);
     }
   },
 
   logout({ commit }) {
-    commit('setUser', null);
-    commit('setToken', null);
-    commit('setRole', null); // Limpa o papel do usuário ao fazer logout
+    commit('CLEAR_TOKEN');
+    delete axios.defaults.headers.common['Authorization'];
   },
+};
+
+// Definindo os getters
+const getters = {
+  authUser: state => state.authUser,
+  token: state => state.token,
+  role: state => state.role,
 };
 
 // Criando a store com persistência
