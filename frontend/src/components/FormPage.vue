@@ -54,7 +54,6 @@
     </div>
 
     <div class="footer">
-      <!-- <p>Problemas com seu cadastro? <a href="#">Clique para acessar como recrutador</a></p> -->
       Problemas com seu cadastro?
       <RouterLink to="/loginre" class="users-links">
         Clique para acessar como recrutador
