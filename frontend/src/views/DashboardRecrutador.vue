@@ -91,16 +91,21 @@
     <!-- Modal de Candidatos -->
     <div v-if="showCandidatesModal" class="modal">
       <div class="modal-content">
-        <h2>Candidatos para a Vaga</h2>
-        <ul>
-          <li v-for="candidate in candidates" :key="candidate.id">
-            {{ candidate.first_name }} {{ candidate.last_name }} - {{ candidate.email }}
-          </li>
-        </ul>
-        <button @click="showCandidatesModal = false">Fechar</button>
+        <h2 class="modal-title" >Candidatos para a Vaga</h2>
+        <div class="modal-body">
+
+          <ul>
+            <li v-for="candidate in candidates" :key="candidate.id"class="candidate-card">
+              <p><strong>Nome:</strong> {{ candidate.first_name }} {{ candidate.last_name }}</p>
+              <p><strong>Email:</strong> {{ candidate.email }}</p>
+              <p><strong>Resumo:</strong> {{ candidate.resume }}</p>
+            </li>
+          </ul>
+        </div>
+          <button @click="showCandidatesModal = false" class="close-button">Fechar</button>
+        </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -300,46 +305,93 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7); /* Escurecimento do fundo */
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000; /* Certifique-se de que o modal esteja acima de outros elementos */
 }
 
 .modal-content {
-  background-color: #fff;
+  background: white;
   padding: 20px;
-  border-radius: 10px;
-  width: 400px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 600px;
+  max-height: 80vh; /* Define a altura máxima do modal */
   display: flex;
   flex-direction: column;
-  gap: 10px;
+}
+
+.modal-title {
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.modal-body {
+  overflow-y: auto; /* Permite rolagem vertical */
+  flex-grow: 1; /* Faz com que o corpo do modal cresça para ocupar o espaço disponível */
+}
+
+.candidate-card {
+  background: #f9f9f9;
+  padding: 15px; /* Aumenta o padding */
+  margin-bottom: 15px; /* Espaço entre os candidatos */
+  border-radius: 5px; /* Arredonda os cantos */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Adiciona sombra ao cartão do candidato */
+}
+
+.candidate-card p {
+  margin: 5px 0; /* Espaçamento vertical entre os parágrafos */
+}
+
+.close-button {
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: block;
+  margin: 20px auto 0;
+}
+
+.close-button:hover {
+  background: #ff1a1a;
 }
 
 .modal-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
 }
 
 .modal-actions button {
-  padding: 5px 10px;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
+  padding: 10px; /* Aumenta o padding dos botões */
+  border-radius: 5px; /* Arredonda os cantos dos botões */
 }
 
 .modal-actions button:first-child {
-  background-color: #f44336;
-  color: #fff;
+  background-color: #f44336; /* Cor do botão "Salvar" */
 }
 
 .modal-actions button:last-child {
-  background-color: #f44336;
-  color: #fff;
+  background-color: #ccc; /* Cor do botão "Fechar" */
 }
 
+.modal-actions button:hover {
+    opacity: .8; /* Efeito de hover suave */
+}
 
+/* Estilos adicionais para os botões no header e job cards */
+.add-button,
+.back-button,
+.actions button {
+    transition: background-color .3s ease, color .3s ease; /* Transição suave para cores */
+}
 
 .logo-container {
   display: flex;
