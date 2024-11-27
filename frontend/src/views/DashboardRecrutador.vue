@@ -94,7 +94,7 @@
         <h2 class="modal-title" >Candidatos para a Vaga</h2>
         <div class="modal-body">
 
-          <ul>
+          <ul class="candidate-list">
             <li v-for="candidate in candidates" :key="candidate.id"class="candidate-card">
               <p><strong>Nome:</strong> {{ candidate.first_name }} {{ candidate.last_name }}</p>
               <p><strong>Email:</strong> {{ candidate.email }}</p>
@@ -174,7 +174,10 @@ export default {
             Authorization: `Bearer ${this.token}`,
           },
         });
-        this.candidates = response.data.map(candidate => candidate.user);
+        this.candidates = response.data.map(candidate => ({
+          ...candidate.user,
+          resume: candidate.resume,
+        }));
         this.selectedJobId = jobId;
         this.showCandidatesModal = true;
       } catch (error) {
@@ -335,6 +338,11 @@ export default {
 .modal-body {
   overflow-y: auto; /* Permite rolagem vertical */
   flex-grow: 1; /* Faz com que o corpo do modal cresça para ocupar o espaço disponível */
+}
+
+.candidate-list {
+  list-style-type: none; /* Remove os marcadores da lista */
+  padding: 0; /* Remove o padding padrão */
 }
 
 .candidate-card {
