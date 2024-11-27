@@ -10,7 +10,6 @@
       </div>
     </header>
 
-    <!-- Lista de Vagas -->
     <div class="job-cards">
       <div v-for="job in jobs" :key="job.id" class="job-card">
         <h3>{{ job.title }}</h3>
