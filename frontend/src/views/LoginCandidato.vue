@@ -18,7 +18,7 @@
         <RouterLink to="/cadastro" class="tab active">QUERO ME CADASTRAR</RouterLink>
       </div>
   
-      <div class="box-info">
+      <!-- <div class="box-info">
         <form @submit.prevent="handleSubmit" 
         id="registrationForm">
   
@@ -34,7 +34,21 @@
   
           <button type="submit" class="submit-button">EFETUAR LOGIN</button>
         </form>
+      </div> -->
+      <div class="form-container">
+    <form @submit.prevent="handleSubmit">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" v-model="formData.email" required>
       </div>
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input type="password" v-model="formData.password" required>
+      </div>
+      <button type="submit" class="submit-button">EFETUAR LOGIN</button>
+    </form>
+    <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
+  </div>
   
       <div class="footer">
         <p>Problemas com seu cadastro? <a href="#">Clique para contatar o suporte</a></p>
@@ -58,7 +72,8 @@ export default {
             formData: {
                 email: '',
                 password: '',
-            }
+            },
+            errorMessage: '',
         };
     },
     methods: {
@@ -67,6 +82,7 @@ export default {
       async handleSubmit() {
         try {
           await this.loginCandidate(this.formData); // Chama a ação de login
+          console.log('Role:', this.$store.getters.role); // Verifica o papel do usuário
           if (this.$store.getters.role !== 'candidate') {
             throw new Error('Usuário não é um candidato');
           }
@@ -144,6 +160,11 @@ export default {
   flex-direction: column;
   margin-bottom: .9375rem;
   border-radius: .625rem;
+}
+
+.error-message {
+  margin-top: 1rem;
+  color: red;
 }
 
 label {
