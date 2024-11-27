@@ -109,7 +109,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex'; // Importa mapState para acessar o estado do Vuex
+import { mapGetters } from 'vuex'; 
 import axios from "axios";
 import { mapActions } from "vuex";
 
