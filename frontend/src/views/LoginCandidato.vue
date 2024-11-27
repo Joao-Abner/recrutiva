@@ -67,12 +67,13 @@ export default {
       async handleSubmit() {
         try {
           await this.loginCandidate(this.formData); // Chama a ação de login
-          if (this.$store.getters.role === 'candidate') {
-            this.$router.push('/dashcandidato'); // Redireciona após login bem-sucedido
+          if (this.$store.getters.role !== 'candidate') {
+            throw new Error('Usuário não é um candidato');
           }
           this.$router.push('/dashcandidato'); // Redireciona após login bem-sucedido
         } catch (error) {
           console.error("Erro ao fazer login:", error);
+        alert('Falha ao efetuar login. Verifique suas credenciais.');
         }
       },
     },
