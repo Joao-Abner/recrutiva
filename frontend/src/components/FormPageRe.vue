@@ -26,22 +26,22 @@
         </div>
 
         <div class="form-group">
-          <label for="sobrenome">Sobrenome *</label>
+          <label for="sobrenome">Sobrenome </label>
           <input type="text" name="sobrenome" v-model="formData.last_name" placeholder="Sobrenome" required>
         </div>
 
         <div class="form-group">
-          <label for="email">Email *</label>
+          <label for="email">Email </label>
           <input type="email" name="email" v-model="formData.email" placeholder="Digite seu Email" required>
         </div>
 
         <div class="form-group">
-          <label for="senha">Senha *</label>
+          <label for="senha">Senha </label>
           <input type="password" name="senha" v-model="formData.password" placeholder="Digite sua senha" required>
         </div>
 
         <div class="form-group">
-          <label for="repetir_senha">Repetir senha *</label>
+          <label for="repetir_senha">Repetir senha </label>
           <input type="password" name="repetir_senha" v-model="formData.password_confirmation"
             placeholder="Repita sua senha" required>
         </div>
