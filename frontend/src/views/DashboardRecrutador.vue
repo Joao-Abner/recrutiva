@@ -84,8 +84,20 @@
         <div class="actions">
           <button @click="openEditModal(job)">✏️ Editar</button>
           <button @click="deleteJob(job.id)">🗑️ Deletar</button>
-          <button @click="candidatesJob(job.id)">👤 Candidatos</button>
+          <button @click="fetchCandidates(job.id)">👤 Candidatos</button>
         </div>
+      </div>
+    </div>
+    <!-- Modal de Candidatos -->
+    <div v-if="showCandidatesModal" class="modal">
+      <div class="modal-content">
+        <h2>Candidatos para a Vaga</h2>
+        <ul>
+          <li v-for="candidate in candidates" :key="candidate.id">
+            {{ candidate.first_name }} {{ candidate.last_name }} - {{ candidate.email }}
+          </li>
+        </ul>
+        <button @click="showCandidatesModal = false">Fechar</button>
       </div>
     </div>
   </div>
@@ -103,6 +115,8 @@ export default {
       jobs: [],
       showAddModal: false,
       showEditModal: false,
+      showCandidatesModal: false,
+      candidates: [],
       newJob: {
         title: "",
         description: "",
@@ -142,7 +156,25 @@ export default {
         this.jobs = response.data.data;
       } catch (error) {
         console.error("Erro ao buscar vagas:", error);
-        alert("Falha ao buscar vagas."); // Você pode substituir por uma notificação
+        alert("Falha ao buscar vagas."); 
+      } finally {
+        this.loading = false; // Finaliza o carregamento
+      }
+    },
+    async fetchCandidates(jobId) {
+      this.loading = true; // Inicia o carregamento
+      try {
+        const response = await axios.get(`http://localhost:8001/api/my-jobs/${jobId}/candidates`, {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        });
+        this.candidates = response.data.map(candidate => candidate.user);
+        this.selectedJobId = jobId;
+        this.showCandidatesModal = true;
+      } catch (error) {
+        console.error("Erro ao buscar candidatos:", error);
+        alert("Falha ao buscar candidatos."); 
       } finally {
         this.loading = false; // Finaliza o carregamento
       }
