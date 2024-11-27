@@ -6,7 +6,7 @@
         <h1 class="logo-text">RECRUTIVA</h1>
       </div>
       <div class="header-actions">
-        <button @click="logout" class="back-button">SAIR</button>
+        <button @click="handleLogout" class="back-button">SAIR</button>
       </div>
     </header>
 
@@ -28,7 +28,7 @@
 
 <script>
 import axios from "axios";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "DashBoardCandidato",
@@ -42,6 +42,16 @@ export default {
     ...mapGetters(["authUser", "token"]),
   },
   methods: {
+    ...mapActions(["logout"]),
+    async handleLogout() {
+      try {
+        await this.logout(); // Chamando a ação do Vuex para logout
+        this.$router.push('/loginre'); // Redirecionando para a tela de login
+      } catch (error) {
+        console.error("Erro ao realizar logout:", error);
+        alert("Falha ao realizar logout.");
+      }
+    },
     async fetchJobs() {
       this.loading = true;
       try {
@@ -57,11 +67,6 @@ export default {
       } finally {
         this.loading = false;
       }
-    },
-
-    async handleLogout() {
-      await this.logout();
-      this.$router.push('/loginre');
     },
     async acceptJob(jobId) {
       if (confirm("Você tem certeza que deseja se inscrever nesta vaga?")) {
@@ -87,7 +92,6 @@ export default {
     },
     deleteJob(jobId) {
       if (confirm("Você tem certeza que deseja remover esta vaga da visualização?")) {
-        // Remove a vaga da lista de jobs visualmente
         this.jobs = this.jobs.filter(job => job.id !== jobId);
         alert("Vaga removida da visualização.");
       }
@@ -98,6 +102,7 @@ export default {
   },
 };
 </script>
+
 
 
 
