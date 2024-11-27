@@ -85,7 +85,7 @@ export default {
     },
     methods: {
         handleSubmit() {
-            fetch('http://localhost:8001/api/register-candidate', {
+            fetch('http://localhost:8001/api/auth/register-candidate', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
