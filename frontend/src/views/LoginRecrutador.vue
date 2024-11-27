@@ -1,60 +1,88 @@
 <template>
-    <div class="container">
+  <div class="container">
     <div class="container_top_page">
-      
+
       <RouterLink to="/" class="button_sair">
         <ArrowLeft />
-      </RouterLink> 
-      
+      </RouterLink>
+
       <div class="texto_header">
         <h1>Olá, Recrutador!</h1>
-      
-      <p>Encontre o seu candidato ideal em empresas comprometidas com o seu futuro.</p>
+
+        <p>Encontre o seu candidato ideal em empresas comprometidas com o seu futuro.</p>
       </div>
     </div>
-  
-      <div class="tabs">
-        <RouterLink to="/loginre" class="tab">JÁ SOU CADASTRADO</RouterLink>
-        <RouterLink to="/cadastrore" class="tab active">QUERO ME CADASTRAR</RouterLink>
-      </div>
-  
-      <div class="box-info">
-        <form>
-  
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" placeholder="Digite seu Email" required>
-          </div>
-  
-          <div class="form-group">
-            <label for="senha">Senha</label>
-            <input type="password" name="senha" id="senha" placeholder="Digite sua senha" required>
-          </div>
-  
-          <button type="submit" class="submit-button">EFETUAR LOGIN</button>
-        </form>
-      </div>
-  
-      <div class="footer">
-        <p>Problemas com seu cadastro? <a href="#">Clique para contatar o suporte</a></p>
-      </div>
+
+    <div class="tabs">
+      <RouterLink to="/loginre" class="tab">JÁ SOU CADASTRADO</RouterLink>
+      <RouterLink to="/cadastrore" class="tab active">QUERO ME CADASTRAR</RouterLink>
     </div>
-  </template>
+
+    <div class="box-info">
+      <form @submit.prevent="handleSubmit" id="registrationForm">
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" name="email" v-model="formData.email" placeholder="Digite seu Email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="senha">Senha</label>
+          <input type="password" name="senha" v-model="formData.password" placeholder="Digite sua senha" required>
+        </div>
+
+        <!-- <RouterLink to="/dashrecrutador" class="tab">Efetuar Login</RouterLink> -->
+        <button type="submit" class="tab">Efetuar Login</button>
+      </form>
+    </div>
+
+    <div class="footer">
+      <Routerlink to="/loginca" class="users-links">
+        Clique para acessar como Candidato
+      </Routerlink>
+    </div>
+  </div>
+</template>
 
 <script>
 import { RouterLink } from 'vue-router';
 import { ArrowLeft } from 'lucide-vue-next';
+import { mapActions } from 'vuex';
 
 export default {
   components: {
     ArrowLeft
+  },
+
+  data() {
+    return {
+      formData: {
+        email: '',
+        password: '',
+      }
+    };
+  },
+  methods: {
+    ...mapActions(['loginRecruiter']), // Mapeia a ação de login do Vuex
+
+    async handleSubmit() {
+      try {
+        await this.loginRecruiter(this.formData); // Chama a ação de login
+        if (this.$store.getters.role !== 'recruiter') {
+          throw new Error('Usuário não é um recrutador');
+        }
+          this.$router.push('/dashrecrutador'); // Redireciona após login bem-sucedido
+      } catch (error) {
+        console.error("Erro ao fazer login:", error);
+        alert('Falha ao efetuar login. Verifique suas credenciais.');
+      }
+    }
   }
 }
 
 </script>
 
 <style>
-
 .container {
   max-width: 37.5rem;
   margin: auto;
@@ -71,7 +99,7 @@ export default {
   flex-direction: column;
 }
 
-.texto_header{
+.texto_header {
   display: flex;
   flex-direction: column
 }
@@ -95,7 +123,7 @@ export default {
   border-bottom: .125rem solid #f02424;
 }
 
-.button_sair{
+.button_sair {
   padding: .625rem 1.25rem;
   background-color: #2c3e50;
   cursor: pointer;
@@ -122,10 +150,21 @@ label {
   font-weight: bold;
 }
 
-input, select {
+input,
+select {
   padding: .625rem;
   border: .0625rem solid #ddd;
   border-radius: .25rem;
+}
+
+.users-links {
+  color: #f02424;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.users-links:hover {
+  text-decoration: underline;
 }
 
 .submit-button {

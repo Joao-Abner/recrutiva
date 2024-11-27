@@ -20,6 +20,13 @@ Route::get('/', function () {
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/jobs/create', 'JobController@create')->middleware('role:Recrutador');
     Route::post('/jobs', 'JobController@store')->middleware('role:Recrutador');
+
+      // Rotas para visualizar, editar e deletar vagas
+      Route::get('/jobs/my-jobs', 'JobController@index')->middleware('role:Recrutador')->name('jobs.index');
+      Route::get('/jobs/{id}/edit', 'JobController@edit')->middleware('role:Recrutador')->name('jobs.edit');
+      Route::post('/jobs/{id}', 'JobController@update')->middleware('role:Recrutador')->name('jobs.update');
+      Route::delete('/jobs/{id}', 'JobController@destroy')->middleware('role:Recrutador')->name('jobs.destroy');
+
     Route::get('/jobs', 'JobController@index')->middleware('role:Candidato');
     Route::post('/applications', 'ApplicationController@store')->middleware('role:Candidato');
 });

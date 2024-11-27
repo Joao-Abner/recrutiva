@@ -44,6 +44,30 @@ const router = createRouter({
         title: 'LoginCandidato'
       }
     },
+    {
+      path: '/dashrecrutador',
+      name: 'DashRecrutador',
+      component: () => import('../views/DashboardRecrutador.vue'),
+      meta: {
+        title: 'DashRecrutador'
+      }
+    },
+    {
+      path: '/dashcandidato',
+      name: 'DashCandidato',
+      component: () => import('../views/DashboardCandidato.vue'),
+      meta: {
+        title: 'DashCandidato'
+      }
+    },
+    {
+      path: '/formvagas',
+      name: 'formvagas',
+      component: () => import('../views/FormularioVagas.vue'),
+      meta: {
+        title: 'FormVagas'
+      }
+    },
   ]
 })
 

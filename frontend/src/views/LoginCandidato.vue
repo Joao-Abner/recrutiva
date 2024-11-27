@@ -19,7 +19,8 @@
       </div>
   
       <div class="box-info">
-        <form>
+        <form @submit.prevent="handleSubmit" 
+        id="registrationForm">
   
           <div class="form-group">
             <label for="email">Email</label>
@@ -44,14 +45,41 @@
 <script>
 import { RouterLink } from 'vue-router';
 import { ArrowLeft } from 'lucide-vue-next';
+import { mapActions } from 'vuex';
+
+import axios from 'axios';
 
 export default {
   components: {
     ArrowLeft
-  }
-}
+  },
+    data() {
+        return {
+            formData: {
+                email: '',
+                password: '',
+            }
+        };
+    },
+    methods: {
+      ...mapActions(['loginCandidate']), // Mapeia a ação de login do Vuex
+
+      async handleSubmit() {
+        try {
+          await this.loginCandidate(this.formData); // Chama a ação de login
+          if (this.$store.getters.role === 'candidate') {
+            this.$router.push('/dashcandidato'); // Redireciona após login bem-sucedido
+          }
+          this.$router.push('/dashcandidato'); // Redireciona após login bem-sucedido
+        } catch (error) {
+          console.error("Erro ao fazer login:", error);
+        }
+      },
+    },
+};
 
 </script>
+
 
 <style>
 
