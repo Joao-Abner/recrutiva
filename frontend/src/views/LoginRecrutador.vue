@@ -9,7 +9,7 @@
       <div class="texto_header">
         <h1>Olá, Recrutador!</h1>
 
-        <p>Encontre o seu candidato ideal em empresas comprometidas com o seu futuro.</p>
+        <p>Encontre o seu candidato ideal.</p>
       </div>
     </div>
 
