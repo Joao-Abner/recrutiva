@@ -13,8 +13,8 @@
     </div>
 
     <div class="tabs">
-      <RouterLink to="/loginca" class="tab">JÁ SOU CADASTRADO</RouterLink>
-      <RouterLink to="/cadastro" class="tab active">QUERO ME CADASTRAR</RouterLink>
+      <RouterLink to="/loginca" class="tab active">JÁ SOU CADASTRADO</RouterLink>
+      <RouterLink to="/cadastro" class="tab">QUERO ME CADASTRAR</RouterLink>
     </div>
     <div class="form-container">
       <form @submit.prevent="handleSubmit">

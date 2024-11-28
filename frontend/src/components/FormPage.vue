@@ -56,7 +56,7 @@
     <div class="footer">
       Problemas com seu cadastro?
       <RouterLink to="/loginre" class="users-links">
-        Clique para acessar como recrutador
+        Clique para acessar como Recrutador
       </RouterLink>
     </div>
   </div>

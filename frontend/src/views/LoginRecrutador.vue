@@ -14,8 +14,8 @@
     </div>
 
     <div class="tabs">
-      <RouterLink to="/loginre" class="tab">JÁ SOU CADASTRADO</RouterLink>
-      <RouterLink to="/cadastrore" class="tab active">QUERO ME CADASTRAR</RouterLink>
+      <RouterLink to="/loginre" class="tab active">JÁ SOU CADASTRADO</RouterLink>
+      <RouterLink to="/cadastrore" class="tab ">QUERO ME CADASTRAR</RouterLink>
     </div>
 
     <div class="form-container">
