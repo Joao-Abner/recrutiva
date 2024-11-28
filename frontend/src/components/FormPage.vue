@@ -9,7 +9,7 @@
       <div class="texto_header">
         <h1>Olá, Candidato!</h1>
 
-        <p>Encontre o sua vaga ideial.</p>
+        <p>Encontre a sua vaga ideial.</p>
       </div>
     </div>
 

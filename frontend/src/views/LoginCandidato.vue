@@ -8,7 +8,7 @@
       <div class="texto_header">
         <h1>Olá, Candidato!</h1>
 
-        <p>Encontre a sua vaga ideal em empresas comprometidas com o seu futuro.</p>
+        <p>Encontre a sua vaga.</p>
       </div>
     </div>
 
