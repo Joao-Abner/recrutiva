@@ -14,11 +14,11 @@
     </div>
 
     <div class="tabs">
-      <RouterLink to="/loginre" class="tab">JÁ SOU CADASTRADO</RouterLink>
-      <RouterLink to="/cadastrore" class="tab active">QUERO ME CADASTRAR</RouterLink>
+      <RouterLink to="/loginre" class="tab active">JÁ SOU CADASTRADO</RouterLink>
+      <RouterLink to="/cadastrore" class="tab ">QUERO ME CADASTRAR</RouterLink>
     </div>
 
-    <div class="box-info">
+    <div class="form-container">
       <form @submit.prevent="handleSubmit" id="registrationForm">
 
         <div class="form-group">
@@ -30,9 +30,9 @@
           <label for="senha">Senha</label>
           <input type="password" name="senha" v-model="formData.password" placeholder="Digite sua senha" required>
         </div>
-
-        <button type="submit" class="tab">Efetuar Login</button>
+        <button type="submit" class="submit-button">EFETUAR LOGIN</button>
       </form>
+      <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
     </div>
 
     <div class="footer">
@@ -47,6 +47,7 @@
 import { RouterLink } from 'vue-router';
 import { ArrowLeft } from 'lucide-vue-next';
 import { mapActions } from 'vuex';
+import { errorMessages } from 'vue/compiler-sfc';
 
 export default {
   components: {
@@ -58,7 +59,8 @@ export default {
       formData: {
         email: '',
         password: '',
-      }
+      },
+      errorMessage: '',
     };
   },
   methods: {
@@ -137,11 +139,25 @@ export default {
   border-radius: .5rem;
 }
 
+.form-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
 .form-group {
   display: flex;
   flex-direction: column;
   margin-bottom: .9375rem;
   border-radius: .625rem;
+}
+
+.error-message {
+  margin-top: 1rem;
+  color: red;
 }
 
 label {

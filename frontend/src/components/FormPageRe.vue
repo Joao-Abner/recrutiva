@@ -14,7 +14,7 @@
     </div>
 
     <div class="tabs">
-      <RouterLink to="/loginre" class="tab ">JÁ SOU CADASTRADO</RouterLink>
+      <RouterLink to="/loginre" class="tab">JÁ SOU CADASTRADO</RouterLink>
       <RouterLink to="/cadastro" class="tab active">QUERO ME CADASTRAR</RouterLink>
     </div>
 
@@ -52,7 +52,10 @@
     </div>
 
     <div class="footer">
-      <p>Problemas com seu cadastro? <a href="#">Clique para contatar o suporte</a></p>
+      Problemas com seu cadastro?
+      <RouterLink to="/loginre" class="users-links">
+        Clique para acessar como Candidato
+      </RouterLink>
     </div>
   </div>
 </template>
