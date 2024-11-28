@@ -53,7 +53,7 @@
 
     <div class="footer">
       Problemas com seu cadastro?
-      <RouterLink to="/loginre" class="users-links">
+      <RouterLink to="/loginca" class="users-links">
         Clique para acessar como Candidato
       </RouterLink>
     </div>
@@ -240,7 +240,8 @@ select {
 
 .footer {
   text-align: center;
-  margin-top: 1.25rem;
+  margin-top: .25rem;
+  margin-bottom: 3.25rem;
 }
 
 .footer a {
