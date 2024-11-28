@@ -36,8 +36,8 @@
           <textarea v-model="newJob.requirements"></textarea>
         </label>
         <div class="modal-actions">
-          <button @click="addJob">Salvar</button>
-          <button @click="showAddModal = false">Cancelar</button>
+          <button @click="addJob" class="submit-button">Adicionar</button>
+          <button @click="showAddModal = false" class="cancel-button">Cancelar</button>
         </div>
       </div>
     </div>
@@ -67,8 +67,8 @@
           <textarea v-model="editJobData.requirements"></textarea>
         </label>
         <div class="modal-actions">
-          <button @click="updateJob">Salvar</button>
-          <button @click="showEditModal = false">Cancelar</button>
+          <button @click="updateJob" class="submit-button">Salvar</button>
+          <button @click="showEditModal = false" class="cancel-button">Cancelar</button>
         </div>
       </div>
     </div>
@@ -312,7 +312,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Certifique-se de que o modal esteja acima de outros elementos */
+  z-index: 1000;
 }
 
 .modal-content {
@@ -324,6 +324,8 @@ export default {
   max-height: 80vh; /* Define a altura máxima do modal */
   display: flex;
   flex-direction: column;
+  overflow: hidden; /* Garante que nada saia da área visível do modal */
+  overflow-y: auto;
 }
 
 .modal-title {
@@ -338,6 +340,51 @@ export default {
 .modal-body {
   overflow-y: auto; /* Permite rolagem vertical */
   flex-grow: 1; /* Faz com que o corpo do modal cresça para ocupar o espaço disponível */
+}
+
+.modal-content h2 {
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.modal-content label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.modal-content input,
+.modal-content textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.submit-button {
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cancel-button {
+  padding: 10px 20px;
+  background-color: #ccc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cancel-button:hover {
+  background-color: #999;
 }
 
 .candidate-list {
@@ -374,12 +421,16 @@ export default {
 
 .modal-actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  gap: 10px;
 }
 
 .modal-actions button {
-  padding: 10px; /* Aumenta o padding dos botões */
-  border-radius: 5px; /* Arredonda os cantos dos botões */
+  padding: 10px 20px; /* Tamanho dos botões */
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .modal-actions button:first-child {
@@ -391,7 +442,7 @@ export default {
 }
 
 .modal-actions button:hover {
-    opacity: .8; /* Efeito de hover suave */
+  opacity: .8; /* Efeito de hover suave */
 }
 
 /* Estilos adicionais para os botões no header e job cards */
@@ -448,7 +499,6 @@ export default {
   justify-content: center;
   padding: 20px;
 }
-
 
 .job-card {
   border: 1px solid #e0e0e0;
