@@ -37,9 +37,9 @@
     </div>
 
     <div class="footer">
-      <Routerlink to="/loginca" class="users-links">
+      <RouterLink to="/loginca" class="users-links">
         Clique para acessar como Candidato
-      </Routerlink>
+      </RouterLink>
     </div>
   </div>
 </template>
