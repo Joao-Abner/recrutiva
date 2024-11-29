@@ -38,9 +38,11 @@ class AuthController extends Controller {
         // Criar token de acesso
         $token = $user->createToken('auth_token')->plainTextToken;
 
+        // Retorna uma resposta JSON contendo o token de acesso, o tipo do token (Bearer) e o papel do usuário.
         return response()->json(['access_token' => $token, 'token_type' => 'Bearer', 'role' => $role]);
     }
 
+    // Exclui o token do usuário, desconectando-o da aplicação
     public function logout(Request $request) {
         $request->user()->currentAccessToken()->delete();
         return response()->json(['message' => 'Logout realizado com sucesso']);
