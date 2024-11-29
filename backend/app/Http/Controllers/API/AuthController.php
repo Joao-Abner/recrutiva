@@ -22,8 +22,10 @@ class AuthController extends Controller {
             'password' => 'required',
         ]);
 
+        // busca um usuário no banco de dados com base no email fornecido na requisição.
         $user = User::where('email', $request->email)->first();
 
+        // Verifica se o usuário existe e se a senha está correta
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json(['message' => 'Credenciais inválidas'], 401);
         }
